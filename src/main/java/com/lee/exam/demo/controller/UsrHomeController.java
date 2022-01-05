@@ -33,4 +33,10 @@ public class UsrHomeController {
 		count++;
 		return count;
 	}
+	@RequestMapping("/usr/home/main5")
+	@ResponseBody
+	public String showMain5() {
+		count = 0;
+		return "카운터의 값이 0으로 초기화 되었습니다.";
+	}
 }
