@@ -13,7 +13,6 @@ public class ArticleService {
 	
 	public ArticleService(ArticleRepository articleRepository) {
 		this.articleRepository = articleRepository;
-		articleRepository.makeTestData();
 	}
 
 
@@ -27,7 +26,7 @@ public class ArticleService {
 		return articleRepository.getArticles();
 	}
 
-
+	
 	public Article getArticle(int id) {
 		return articleRepository.getArticle(id);
 	}
