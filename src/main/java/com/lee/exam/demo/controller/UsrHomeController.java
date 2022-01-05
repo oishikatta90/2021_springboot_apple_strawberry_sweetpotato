@@ -61,22 +61,11 @@ public class UsrHomeController {
 		list.add("영희는 21살");
 		return list;
 	}
-	@RequestMapping("/usr/home/getArticle")
-	@ResponseBody
-	public Article getArticle() {
-		Article article = new Article(1, "제목1");
-		
-		return article;
-	}
 	@RequestMapping("/usr/home/getArticles")
 	@ResponseBody
 	public List<Article> getArticles() {
-		Article article1 = new Article(1, "제목1");
-		Article article2 = new Article(2, "제목2");
 		
 		List<Article>articles = new ArrayList<Article>();
-		articles.add(article1);
-		articles.add(article2);
 		
 		return articles;
 	}
