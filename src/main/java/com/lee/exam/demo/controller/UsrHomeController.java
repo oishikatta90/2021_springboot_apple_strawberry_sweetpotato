@@ -88,5 +88,6 @@ public class UsrHomeController {
  class Article {
 	 private int id;
 	 private String title;
+	 private String body;
 	 
  }
