@@ -14,13 +14,16 @@ import com.lee.exam.demo.vo.Article;
 @Mapper
 public interface ArticleRepository {
 	@Insert("insert into article set regDate=now(), updateDate=now(), title= #{title}, `body`= #{body}")
-	public Article writeArticle(String title, String body);
+	public void writeArticle(@Param("title")String title, @Param("body")String body);
 	
 	@Select("select * from article where id = #{id}")
 	public Article getArticle(@Param("id") int id);
 
 	@Select("select * from article order by id desc")
 	public List<Article> getArticles();
+	
+	@Select("select last_insert_id()")
+	public int getLastInsertId();
 	
 	@Delete("delete from article where id = #{id}")
 	public void deleteArticle(@Param("id")int id);
