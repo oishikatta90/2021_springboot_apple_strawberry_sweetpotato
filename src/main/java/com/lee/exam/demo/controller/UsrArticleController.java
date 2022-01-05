@@ -64,11 +64,7 @@ public class UsrArticleController {
 		
 		article.setTitle(title);
 		article.setBody(body);
-		
-		
-		
-	}
-	
+	}	
 	//서비스 메서드 끝
 	
 	//ActionMethod 시작점
@@ -84,6 +80,17 @@ public class UsrArticleController {
 	@ResponseBody
 	public List<Article> getArticles(String title, String body) {
 		return articles;
+		
+	}
+	@RequestMapping("/usr/article/getArticle")
+	@ResponseBody
+	public Object getArticleAction(int id) {
+		Article article = getArticle(id);
+		
+		if (article == null) {
+			return id + "번 게시물은 존재하지 않습니다.";
+		}
+		return article;
 		
 	}
 	@RequestMapping("/usr/article/doDelete")
