@@ -46,7 +46,7 @@ public class UsrArticleController {
 	}
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String doDelete(int id) {
+	public String doDelete(int id) { 
 		Article article = articleService.getArticle(id);
 		
 		if(article == null) {
