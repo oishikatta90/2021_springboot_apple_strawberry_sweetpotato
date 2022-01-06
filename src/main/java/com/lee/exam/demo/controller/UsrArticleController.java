@@ -2,6 +2,8 @@ package com.lee.exam.demo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +23,20 @@ public class UsrArticleController {
 	// ActionMethod 시작점
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
-	public ResultData<Article> doAdd(String title, String body) {
-
+	public ResultData<Article> doAdd(HttpSession httpSession, String title, String body) {
+		boolean isLogined = false;
+		int loginedMemberId = 0;
+		
+		if (httpSession.getAttribute("loginedMemberId") != null) {
+			isLogined = true;
+			loginedMemberId = (int)httpSession.getAttribute("loginedMemberId");
+		}
+		
+		if (isLogined == false) {
+			return ResultData.from("F-1", "로그인부터 해주세요");
+		}
+		
+		
 		if (Ut.empty(title)) {
 			return ResultData.from("F-1", "제목을 입력해주세요");
 		}
@@ -30,13 +44,13 @@ public class UsrArticleController {
 			return ResultData.from("F-1", "내용을 입력해주세요");
 		}
 
-		ResultData<Integer> writeArticleRd = articleService.writeArticle(title, body);
+		ResultData<Integer> writeArticleRd = articleService.writeArticle(title, body, loginedMemberId);
 		int id = writeArticleRd.getData1();
 
 		Article article = articleService.getArticle(id);
 
 		return ResultData.newData(writeArticleRd, article);
-	}
+	}  
 
 	@RequestMapping("/usr/article/getArticles")
 	@ResponseBody

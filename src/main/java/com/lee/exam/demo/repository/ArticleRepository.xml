@@ -9,6 +9,7 @@
 		insert into article 
 		set regDate=now(), 
 		updateDate=now(), 
+		memberId = #{memberId},
 		title= #{title}, 
 		`body`= #{body}
 	</insert>
