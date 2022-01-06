@@ -33,7 +33,7 @@ public class UsrArticleController {
 		}
 		
 		if (isLogined == false) {
-			return ResultData.from("F-1", "로그인부터 해주세요");
+			return ResultData.from("F-A", "로그인부터 해주세요");
 		}
 		
 		
@@ -76,11 +76,26 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public ResultData<Integer> doDelete(int id) {
+	public ResultData<Integer> doDelete(HttpSession httpSession, int id) {
+		boolean isLogined = false;
+		int loginedMemberId = 0;
+		
+		if (httpSession.getAttribute("loginedMemberId") != null) {
+			isLogined = true;
+			loginedMemberId = (int)httpSession.getAttribute("loginedMemberId");
+		}
+		
+		if (isLogined == false) {
+			return ResultData.from("F-A", "로그인부터 해주세요");
+		}
 		Article article = articleService.getArticle(id);
 
 		if (article == null) {
 			return ResultData.from("F-1", Ut.f("%d번 게시물이 존재하지 않습니다.", id));
+		}
+		
+		if (article.getMemberId() != loginedMemberId) {
+			return ResultData.from("F-2", "본인이 작성 한 게시물만 삭제 가능합니다");
 		}
 
 		articleService.deleteArticle(id);
