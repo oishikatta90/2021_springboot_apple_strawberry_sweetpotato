@@ -86,5 +86,19 @@ nickName = '용사3',
 cellphoneNo = '1234-1234',
 email = 'go@naver.com';
 
+#게시물 테이블에 게시한 회원정보 추가하기
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER updateDate; 
+
+#기존 게시물에 memberId 넣어주기
+UPDATE article
+SET memberId = 2
+WHERE memberId = 0;
+
+DESC article;
+
+SELECT * FROM article;
+
 SELECT * FROM `member`;
+
+
 
