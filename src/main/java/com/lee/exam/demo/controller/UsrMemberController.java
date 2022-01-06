@@ -92,4 +92,22 @@ public class UsrMemberController {
 		
 		return ResultData.from("S-1", Ut.f("%s님 환영합니다.", member.getNickName()));
 	}
+	
+	@RequestMapping("/usr/member/doLogout")
+	@ResponseBody
+	public ResultData doLogout(HttpSession httpSession) {
+		boolean isLogined = false;
+
+		if (httpSession.getAttribute("loginedMemberId") == null) {
+			isLogined = true;
+		}
+		
+		if (isLogined) {
+			return ResultData.from("S-2", "이미 로그아웃 하셨습니다.");
+		}
+		
+		httpSession.removeAttribute("loginedMemberId");
+		
+		return ResultData.from("S-1", "로그아웃 되셨습니다.");
+	}
 }
