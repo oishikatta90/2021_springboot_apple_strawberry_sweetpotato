@@ -23,12 +23,21 @@ public class UsrArticleController {
 	//ActionMethod 시작점
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
-	public Article doAdd(String title, String body) {
-		int id = articleService.writeArticle(title, body);
+	public ResultData doAdd(String title, String body) {
+		
+		if (Ut.empty(title)) {
+			return ResultData.from("F-1", "제목을 입력해주세요");
+		}
+		if (Ut.empty(body)) {
+			return ResultData.from("F-1", "내용을 입력해주세요");
+		}
+		
+		ResultData writeArticleRd = articleService.writeArticle(title, body);
+		int id = (int) writeArticleRd.getData1();
 		
 		Article article = articleService.getArticle(id);
-		return article;
 		
+		return ResultData.from(writeArticleRd.getResultCode(),writeArticleRd.getMsg(),writeArticleRd.getData1());
 	}
 	@RequestMapping("/usr/article/getArticles")
 	@ResponseBody
@@ -38,7 +47,7 @@ public class UsrArticleController {
 	}
 	@RequestMapping("/usr/article/getArticle")
 	@ResponseBody
-	public Object getArticle(int id) {
+	public ResultData getArticle(int id) {
 		Article article = articleService.getArticle(id);
 		
 		if (article == null) {
