@@ -18,7 +18,7 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public ResultData doJoin(String loginId, String loginPw, String name, String nickName, String cellphoneNo, String email) {
+	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickName, String cellphoneNo, String email) {
 		if (Ut.empty(loginId)) {
 			return ResultData.from("F-1", "loginId(을)를 입력해주세요.");
 		}
@@ -40,13 +40,13 @@ public class UsrMemberController {
 		
 		//joinRd 안에는
 		//S-1, 회원가입완료메세지, id(ex7(번호))
-		ResultData joinRd = memberService.join(loginId,loginPw,name,nickName,cellphoneNo,email);
+		ResultData<Integer> joinRd = memberService.join(loginId,loginPw,name,nickName,cellphoneNo,email);
 		
 		if (joinRd.isFail()) {
-			return joinRd;
+			return (ResultData)joinRd;
 		}
 		
-		Member member = memberService.getMemberById((int)joinRd.getData1());
+		Member member = memberService.getMemberById(joinRd.getData1());
 		
 		return ResultData.newData(joinRd, member);
 	}
