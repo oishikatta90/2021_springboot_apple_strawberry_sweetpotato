@@ -17,22 +17,22 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
 	public Object doJoin(String loginId, String loginPw, String name, String nickName, String cellphoneNo, String email) {
-		if (loginId == null) {
+		if (loginId == null || loginId.trim().length() == 0) {
 			return "loginId(을)를 입력해주세요.";
 		}
-		if (loginPw == null) {
+		if (loginPw == null || loginPw.trim().length() == 0) {
 			return "loginPw(을)를 입력해주세요.";
 		}
-		if (name == null) {
+		if (name == null || name.trim().length() == 0) {
 			return "name(을)를 입력해주세요.";
 		}
-		if (nickName == null) {
+		if (nickName == null || nickName.trim().length() == 0) {
 			return "nickName(을)를 입력해주세요.";
 		}
-		if (cellphoneNo == null) {
+		if (cellphoneNo == null || cellphoneNo.trim().length() == 0) {
 			return "cellphoneNo(을)를 입력해주세요.";
 		}
-		if (email == null) {
+		if (email == null || email.trim().length() == 0) {
 			return "email(을)를 입력해주세요.";
 		}
 		
