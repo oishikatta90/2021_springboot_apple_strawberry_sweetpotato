@@ -25,6 +25,13 @@
 		from `member` as m
 		where m.id = #{id}
 	</select>
+	
+	<select id="getMemberByLoginId" resultType="Member">
+		select *
+		from `member` as m
+		where m.loginId = #{loginId}
+	</select>
+	
 
 </mapper>
   
