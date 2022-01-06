@@ -30,8 +30,8 @@ public class UsrArticleController {
 			return ResultData.from("F-1", "내용을 입력해주세요");
 		}
 
-		ResultData writeArticleRd = articleService.writeArticle(title, body);
-		int id = (int) writeArticleRd.getData1();
+		ResultData<Integer> writeArticleRd = articleService.writeArticle(title, body);
+		int id = writeArticleRd.getData1();
 
 		Article article = articleService.getArticle(id);
 
