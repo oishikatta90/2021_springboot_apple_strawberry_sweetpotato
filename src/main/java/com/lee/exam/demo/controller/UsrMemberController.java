@@ -41,11 +41,11 @@ public class UsrMemberController {
 		System.out.println(id);
 		
 		if (id == -1) {
-			return "이미 등록된 회원 아이디입니다.";
+			return Ut.f("해당 로그인아이디(%s)는 이미 사용중입니다.", loginId);
 		}
 		
 		if (id == -2) {
-			return "이미 등록된 이름과 이메일입니다.";
+			return Ut.f("해당 이름(%s)과 이메일(%s)는 이미 사용중입니다.", name, email);
 		}
 		Member member = memberService.getMemberById(id);
 		
