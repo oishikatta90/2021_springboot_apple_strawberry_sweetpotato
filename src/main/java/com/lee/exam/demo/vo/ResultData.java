@@ -29,11 +29,23 @@ public class ResultData {
 		
 		return rd;
 	}
+	public static ResultData from(String resultCode, String msg, Object data1, Object data2) {
+		ResultData rd = new ResultData();
+		rd.resultCode = resultCode;
+		rd.msg = msg;
+		rd.data1 = data1;
+		
+		return rd;
+	}
 	
 	public boolean isSuccess() {
 		return resultCode.startsWith("S-");
 	}
 	public boolean isFail() {
 		return isSuccess() == false;
+	}
+
+	public static ResultData newData(ResultData joinRd, Member member) {
+		return from(joinRd.getResultCode(), joinRd.getMsg());
 	}
 }

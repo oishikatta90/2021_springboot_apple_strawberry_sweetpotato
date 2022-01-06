@@ -3,7 +3,9 @@ package com.lee.exam.demo.service;
 import org.springframework.stereotype.Service;
 
 import com.lee.exam.demo.repository.MemberRepository;
+import com.lee.exam.demo.util.Ut;
 import com.lee.exam.demo.vo.Member;
+import com.lee.exam.demo.vo.ResultData;
 
 @Service
 public class MemberService {	
@@ -14,23 +16,25 @@ public class MemberService {
 	}
 	
 
-	public int join(String loginId, String loginPw, String name, String nickName, String cellphoneNo,
+	public ResultData join(String loginId, String loginPw, String name, String nickName, String cellphoneNo,
 			String email) {
 		//로그인 아이디 중복체크
 		Member oldMember = getMemberByLoginId(loginId);
 		
 		if (oldMember != null) {
-			return -1;
+			return ResultData.from("F-7",Ut.f("이미 존재하는 아이디(%s)입니다.", loginId));
 		}
 		
 		//이름 + 이메일 중복체크
 		oldMember = getMemberByNameAndEmail(name, email);
 		
 		if (oldMember != null) {
-			return -2;
+			return ResultData.from("F-8",Ut.f("이미 존재하는 아이디(%s)와 이메일(%s)입니다.", loginId,email));
 		}
 		memberRepository.join(loginId, loginPw, name, nickName, cellphoneNo, email);
-		return memberRepository.getLastInsertId();
+		int id = memberRepository.getLastInsertId();
+		
+		return ResultData.from("S-1", "회원가입이 완료되었습니다.", id);
 	}
 
 
