@@ -27,8 +27,9 @@ public class ArticleService {
 	}
 
 
-	public List<Article> getArticles() {
-		return articleRepository.getArticles();
+	public ResultData getArticles() {
+		List<Article> article =  articleRepository.getArticles();
+		return ResultData.from("S-1", Ut.f("게시물 조회"), article);
 	}
 
 	
