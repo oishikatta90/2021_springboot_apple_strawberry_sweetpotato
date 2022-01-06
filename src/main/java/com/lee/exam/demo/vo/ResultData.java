@@ -45,7 +45,7 @@ public class ResultData<DT> {
 		return isSuccess() == false;
 	}
 
-	public static <DT> ResultData<DT> newData(ResultData<DT> joinRd, Member member) {
-		return from(joinRd.getResultCode(), joinRd.getMsg());
+	public static <DT> ResultData<DT> newData(ResultData<Integer> writeArticleRd, Object obj) {
+		return from(writeArticleRd.getResultCode(), writeArticleRd.getMsg());
 	}
 }
