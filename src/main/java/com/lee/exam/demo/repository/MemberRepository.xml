@@ -32,6 +32,12 @@
 		where m.loginId = #{loginId}
 	</select>
 	
+	<select id="getMemberByNameAndEmail" resultType="Member">
+		select *
+		from `member` as m
+		where m.name = #{name} and m.email = #{email}
+	</select>
+	
 
 </mapper>
   

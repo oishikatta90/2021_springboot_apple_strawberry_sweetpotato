@@ -43,6 +43,10 @@ public class UsrMemberController {
 		if (id == -1) {
 			return "이미 등록된 회원 아이디입니다.";
 		}
+		
+		if (id == -2) {
+			return "이미 등록된 이름과 이메일입니다.";
+		}
 		Member member = memberService.getMemberById(id);
 		
 		return member;
