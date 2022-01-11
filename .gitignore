@@ -36,3 +36,6 @@ build/
 
 ##커스텀
 bin/
+
+LOG_PATH_IS_UNDEFINED/
+log/
