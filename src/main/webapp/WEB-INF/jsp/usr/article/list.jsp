@@ -6,6 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>리스트</title>
+<link rel="stylesheet" href="/resource/common.css" />
+<script type="text/javascript" defer="defer" src="/resource/common.js">
+
+</script>
 </head>
 <body>
 	<h1>안녕하세요!</h1>

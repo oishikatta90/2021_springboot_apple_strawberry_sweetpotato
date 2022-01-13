@@ -6,9 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>메인</title>
+<link rel="stylesheet" href="/resource/common.css" />
+<script type="text/javascript" defer="defer" src="/resource/common.js">
+
+</script>
 </head>
 <body>
 	<h1>안녕하세요!</h1>
+	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus vel aut magnam dolores ducimus dignissimos excepturi perspiciatis earum incidunt eligendi cumque quod corporis. Fuga sunt quam maiores nemo laborum magnam?
 	
 	<header>
 		<a href="/">로고</a>
