@@ -29,7 +29,7 @@ html > body {
 .table-box-type-1 > table td {
   border:1px solid black;
   padding:10px;
-  text-align:center;
+  /*text-align:center;*/
 }
 .btn-text-link {
   color:skyblue;  
