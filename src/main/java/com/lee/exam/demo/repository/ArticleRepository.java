@@ -11,9 +11,9 @@ import com.lee.exam.demo.vo.Article;
 public interface ArticleRepository {
 	public void writeArticle(@Param("title") String title, @Param("body") String body, @Param("memberId")int memberId);
 
-	public Article getArticle(@Param("id") int id);
+	public Article getForPrintArticle(@Param("id") int id);
 
-	public List<Article> getArticles();
+	public List<Article> getForPrintArticles();
 
 	public int getLastInsertId();
 
