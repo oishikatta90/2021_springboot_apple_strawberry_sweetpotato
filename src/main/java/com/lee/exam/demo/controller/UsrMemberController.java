@@ -100,7 +100,7 @@ public class UsrMemberController {
 	public String doLogout(HttpServletRequest req) {
 		Rq rq = (Rq)req.getAttribute("rq");
 		
-		if (rq.isLogined()) {
+		if (!rq.isLogined()) {
 			return Ut.jsHistoryBack("이미 로그아웃 하셨습니다.");
 		}
 		
