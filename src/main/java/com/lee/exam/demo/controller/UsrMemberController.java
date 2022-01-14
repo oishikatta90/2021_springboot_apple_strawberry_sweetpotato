@@ -53,9 +53,13 @@ public class UsrMemberController {
 		return ResultData.newData(joinRd,"member", member);
 	}
 	
+	@RequestMapping("/usr/member/login")
+	public String showLogin(HttpSession httpSession) {
+		return "/usr/member/login";
+	}
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public ResultData doLogin(HttpSession httpSession, String loginId, String loginPw) {
+	public String doLogin(HttpSession httpSession, String loginId, String loginPw) {
 		boolean isLogined = false;
 		
 		//로그인을 하면 세션에 loginedMemberId 이름으로
@@ -66,14 +70,14 @@ public class UsrMemberController {
 		}
 		
 		if (isLogined) {
-			return ResultData.from("F-5", "이미 로그인 중입니다");
+			return Ut.jsHistoryBack("이미 로그인 되셨습니다.");
 		}
 		
 		if (Ut.empty(loginId)) {
-			return ResultData.from("F-1", "loginId(을)를 입력해주세요.");
+			return Ut.jsHistoryBack("loginId(을)를 입력해주세요.");
 		}
 		if (Ut.empty(loginPw)) {
-			return ResultData.from("F-2", "loginPw(을)를 입력해주세요.");
+			return Ut.jsHistoryBack("loginPw(을)를 입력해주세요.");
 		}
 		
 		//joinRd 안에는
@@ -81,16 +85,16 @@ public class UsrMemberController {
 		Member member = memberService.getMemberByLoginId(loginId);
 		
 		if (member == null) {
-			return ResultData.from("F-3", "없는 아이디입니다.");
+			return Ut.jsHistoryBack("없는 아이디입니다.");
 		}
 		
 		if (!member.getLoginPw().equals(loginPw)) {
-			return ResultData.from("F-4", "비밀번호가 일치하지 않습니다.");
+			return Ut.jsHistoryBack("비밀번호가 일치하지 않습니다.");
 		}
 		
 		httpSession.setAttribute("loginedMemberId", member.getId());
 		
-		return ResultData.from("S-1", Ut.f("%s님 환영합니다.", member.getNickName()));
+		return Ut.jsReplace(Ut.f("%s님 환영합니다.", member.getNickName()),"/");
 	}
 	
 	@RequestMapping("/usr/member/doLogout")

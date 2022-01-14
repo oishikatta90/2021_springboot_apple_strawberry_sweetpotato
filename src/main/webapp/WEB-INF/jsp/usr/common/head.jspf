@@ -40,11 +40,20 @@
 					<span>리스트</span>
 				</a>
 			</li>
-			<li class="h-full hover:underline flex items-center px-3">
-				<a href="/usr/member/login">
+            <c:if test="${!rq.isLogined()}">
+			<li>
+				<a class="h-full hover:underline flex items-center px-3" href="/usr/member/login">
 					<span>로그인</span>
 				</a>
 			</li>
+            </c:if>
+            <c:if test="${rq.isLogined()}">
+			<li>
+				<a class="h-full hover:underline flex items-center px-3" href="/usr/member/doLogout">
+					<span>로그아웃</span>
+				</a>
+			</li>
+            </c:if>
 		</ul>
 	  </div>
 	</header>
