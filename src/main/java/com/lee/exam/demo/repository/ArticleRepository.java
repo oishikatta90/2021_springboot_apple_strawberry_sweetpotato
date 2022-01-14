@@ -14,7 +14,7 @@ public interface ArticleRepository {
 	public Article getForPrintArticle(@Param("id") int id);
 
 	public List<Article> getForPrintArticles();
-
+	
 	public int getLastInsertId();
 
 	public void deleteArticle(@Param("id") int id);
