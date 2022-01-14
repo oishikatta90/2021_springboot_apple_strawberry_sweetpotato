@@ -25,16 +25,24 @@ public class Ut {
 		if (msg == null) {
 			msg = "";
 		}
-		
-		return Ut.f(""" 
-				<script>
-				const msg = '%s'.trim();
-				if ( msg.length > 0 ) {
-					alert(msg);
-				}
-				history.back();
-				</script>
-				""", msg);
+		return Ut.f("<script>\n" +
+					"const msg = '%s'.trim();\n" +
+					"if (msg.length > 0) {\n" +
+					"alert(msg)\n" +
+					"} \n" + 
+					"history.back(); \n" + 
+					"</script>\n"
+								, msg);
+//		return Ut.f(""" 
+//				<script>
+//				const msg = '%s'.trim();
+//				if ( msg.length > 0 ) {
+//					alert(msg);
+//				}
+//				history.back();
+//				</script>
+//				""", msg);
+//	}
 	}
 
 	public static String jsReplace(String msg, String uri) {
@@ -45,17 +53,26 @@ public class Ut {
 		if (uri == null) {
 			uri = "";
 		}
-		
 	
-		return Ut.f("""
-				<script>
-				const msg = '%s'.trim();
-				if ( msg.length > 0 ) {
-					alert(msg);
-				}
-				location.replace('%s');
-				</script>
-				""", msg, uri);
+		return Ut.f("<script> \n" +
+				"const msg = '%s'.trim(); \n" +
+				"if (msg.length > 0) { \n" +
+				"alert(msg); \n" +
+				"} \n" + 
+				"location.replace('%s'); \n" + 
+				"</script> \n"
+				, msg, uri);
 	}
+//		return Ut.f("""
+//				<script>
+//				const msg = '%s'.trim();
+//				if ( msg.length > 0 ) {
+//					alert(msg);
+//				}
+//				location.replace('%s');
+//				</script>
+//				""", msg, uri);
+//	}
 	
 }
+	
