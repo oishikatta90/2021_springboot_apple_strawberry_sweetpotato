@@ -1,6 +1,7 @@
 package com.lee.exam.demo.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import com.lee.exam.demo.service.MemberService;
 import com.lee.exam.demo.util.Ut;
 import com.lee.exam.demo.vo.Member;
 import com.lee.exam.demo.vo.ResultData;
+import com.lee.exam.demo.vo.Rq;
 
 @Controller
 public class UsrMemberController {
@@ -59,17 +61,13 @@ public class UsrMemberController {
 	}
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(HttpSession httpSession, String loginId, String loginPw) {
-		boolean isLogined = false;
-		
+	public String doLogin(HttpServletRequest req, String loginId, String loginPw) {
+		Rq rq = (Rq)req.getAttribute("rq");
 		//로그인을 하면 세션에 loginedMemberId 이름으로
 		//로그인 아이디가 저장된다. if문으로 저장된 값이 있냐
 		//물었을 때 있으면 isLogined를 true로 바꿔줘서 로그인 중으로 표시
-		if (httpSession.getAttribute("loginedMemberId") != null) {
-			isLogined = true;
-		}
 		
-		if (isLogined) {
+		if (rq.isLogined()) {
 			return Ut.jsHistoryBack("이미 로그인 되셨습니다.");
 		}
 		
@@ -92,7 +90,7 @@ public class UsrMemberController {
 			return Ut.jsHistoryBack("비밀번호가 일치하지 않습니다.");
 		}
 		
-		httpSession.setAttribute("loginedMemberId", member.getId());
+		rq.login(member);
 		
 		return Ut.jsReplace(Ut.f("%s님 환영합니다.", member.getNickName()),"/");
 	}
