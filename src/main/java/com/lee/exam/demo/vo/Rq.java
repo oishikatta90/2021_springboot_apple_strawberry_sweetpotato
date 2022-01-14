@@ -67,4 +67,9 @@ public class Rq {
 	public void login(Member member) {
 		httpSession.setAttribute("loginedMemberId", member.getId());
 	}
+
+	public void logout() {
+		httpSession.removeAttribute("loginedMemberId");
+		
+	}
 }
