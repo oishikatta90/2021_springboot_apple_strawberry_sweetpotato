@@ -47,24 +47,39 @@ public class UsrArticleController {
 		ResultData<Integer> writeArticleRd = articleService.writeArticle(title, body, loginedMemberId);
 		int id = writeArticleRd.getData1();
 
-		Article article = articleService.getForPrintArticle(id);
+		Article article = articleService.getForPrintArticle(loginedMemberId, id);
 
 		return ResultData.newData(writeArticleRd,"article", article);
 	}
 
 	@RequestMapping("/usr/article/list")
-	public String showList(Model model) {
+	public String showList(Model model, HttpSession httpSession) {
+		boolean isLogined = false;
+		int loginedMemberId = 0;
 
-		List<Article> articles = articleService.getForPrintArticles();
+		if (httpSession.getAttribute("loginedMemberId") != null) {
+			isLogined = true;
+			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
+		}
+
+
+		List<Article> articles = articleService.getForPrintArticles(loginedMemberId);
 		
 		model.addAttribute("articles",articles);
 		return "usr/article/list";
 	}
 
 	@RequestMapping("/usr/article/detail")
-	public String showDetail(Model model, int id) {
+	public String showDetail(Model model,HttpSession httpSession, int id) {
+		boolean isLogined = false;
+		int loginedMemberId = 0;
+
+		if (httpSession.getAttribute("loginedMemberId") != null) {
+			isLogined = true;
+			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
+		}
 		
-		Article article = articleService.getForPrintArticle(id);
+		Article article = articleService.getForPrintArticle(loginedMemberId, id);
 		
 		model.addAttribute("article",article);
 		return "usr/article/detail";
@@ -72,8 +87,15 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/getArticle")
 	@ResponseBody
-	public ResultData<Article> getArticle(int id) {
-		Article article = articleService.getForPrintArticle(id);
+	public ResultData<Article> getArticle(HttpSession httpSession, int id) {
+		boolean isLogined = false;
+		int loginedMemberId = 0;
+
+		if (httpSession.getAttribute("loginedMemberId") != null) {
+			isLogined = true;
+			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
+		}
+		Article article = articleService.getForPrintArticle(loginedMemberId,id);
 
 		if (article == null) {
 
@@ -97,7 +119,7 @@ public class UsrArticleController {
 		if (isLogined == false) {
 			return ResultData.from("F-A", "로그인부터 해주세요");
 		}
-		Article article = articleService.getForPrintArticle(id);
+		Article article = articleService.getForPrintArticle(loginedMemberId,id);
 
 		if (article == null) {
 			return ResultData.from("F-1", Ut.f("%d번 게시물이 존재하지 않습니다.", id));
@@ -128,7 +150,7 @@ public class UsrArticleController {
 			return ResultData.from("F-A", "로그인 후 이용해주세요");
 		}
 
-		Article article = articleService.getForPrintArticle(id);
+		Article article = articleService.getForPrintArticle(loginedMemberId, id);
 
 		if (article == null) {
 			return ResultData.from("F-1", Ut.f("%d번 게시물이 존재하지 않습니다.", id));
