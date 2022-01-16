@@ -143,5 +143,13 @@ public class UsrArticleController {
 			return Ut.jsReplace(Ut.f("%d번 게시물이 수정되었습니다.", id), Ut.f("../article/detail?id=%d", id));
 
 	}
+	
+	@RequestMapping("/usr/article/write")
+	public String showWrite(HttpServletRequest req, String title, String body) {
+		Rq rq = (Rq)req.getAttribute("rq");
+		
+		return "usr/article/write";
+		
+	}
 	// ActionMethod 끝
 }
