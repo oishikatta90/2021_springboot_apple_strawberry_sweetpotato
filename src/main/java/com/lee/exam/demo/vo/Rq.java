@@ -77,4 +77,37 @@ public class Rq {
 		req.setAttribute("historyBack",true);
 		return "common/js";
 	}
+
+	public String jsHistoryBack(String msg) {
+		if (msg == null) {
+			msg = "";
+		}
+		return Ut.f("<script>\n" +
+					"const msg = '%s'.trim();\n" +
+					"if (msg.length > 0) {\n" +
+					"alert(msg)\n" +
+					"} \n" + 
+					"history.back(); \n" + 
+					"</script>\n"
+								, msg);
+	}
+
+	public String jsReplace(String msg, String uri) {
+		if (msg == null) {
+			msg = "";
+		}
+		
+		if (uri == null) {
+			uri = "";
+		}
+	
+		return Ut.f("<script> \n" +
+				"const msg = '%s'.trim(); \n" +
+				"if (msg.length > 0) { \n" +
+				"alert(msg); \n" +
+				"} \n" + 
+				"location.replace('%s'); \n" + 
+				"</script> \n"
+				, msg, uri);
+	}
 }
