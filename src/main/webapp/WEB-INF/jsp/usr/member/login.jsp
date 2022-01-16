@@ -13,37 +13,32 @@
         <tbody>
           <tr>
             <th>아이디</th>
-            <td>
-              <input name="loginId" class="w-96" type="text" placeholder="로그인 아이디"/>
-            </td>
+            <td><input name="loginId" class="w-96" type="text" placeholder="로그인 아이디" /></td>
           </tr>
           <tr>
             <th>비밀번호</th>
-            <td>
-              <input name="loginPw" class="w-96" type="text" placeholder="비밀번호">
-            </td>
+            <td><input name="loginPw" class="w-96" type="text" placeholder="비밀번호"></td>
           </tr>
           <tr>
-            <th>
-              로그인
-            </th>
+            <th>로그인</th>
             <td>
-              <input type="submit" value="로그인">
-              <button type="button" onclick="history.back();">뒤로가기</button>
+              <button type="submit" class="btn btn-accent">로그인</button>
+              <button type="button" class="btn btn-outline btn-primary" onclick="history.back();">뒤로가기</button>
             </td>
-           </tr>
+          </tr>
         </tbody>
       </table>
     </div>
-  </form>
 
-  <div class="btns">
-    <button class="btn-text-link" type="button" onclick="history.back()">뒤로가기</button>
-    <c:if test="${article.extra__actorCanDelete}">
-      <a class="btn-text-link" href="../article/modify?id=${article.id }">게시물 수정</a>
-      <a class="btn-text-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false  ) return false;"
-        href="../article/doDelete?id=${article.id }">게시물 삭제</a>
-    </c:if>
-  </div>
+
+    <div class="btns">
+      <button class="btn-text-link " type="button" onclick="history.back()">뒤로가기</button>
+      <c:if test="${article.extra__actorCanDelete}">
+        <a class="btn-text-link" href="../article/modify?id=${article.id }">게시물 수정</a>
+        <a class="btn-text-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false  ) return false;"
+          href="../article/doDelete?id=${article.id }">게시물 삭제</a>
+      </c:if>
+    </div>
+  </form>
 </section>
 <%@ include file="../common/foot.jspf"%>
