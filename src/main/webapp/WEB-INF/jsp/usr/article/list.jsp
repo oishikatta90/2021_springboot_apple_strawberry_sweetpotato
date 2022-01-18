@@ -5,8 +5,29 @@
 <%@ include file="../common/head.jspf"%>
 <section class="mt-5">
   <div class="container mx-auto px-3">
-      <div>게시물 개수 : ${articlesCount } 건</div>
-    <div class="mt-2 overflow-x-auto">
+    <div class="flex">
+      <div>
+        게시물 개수 :<span class="badge badge-primary">${articlesCount }</span>건
+      </div>
+      <div class="flex-grow"></div>
+      <form action="" class="flex">
+      <input type="hidden" name="boardId" value="${boardId }" />
+      
+        <select data-value="${param.searchKeywordTypeCode}" class="select select-bordered max-w-xs" name="searchKeywordTypeCode">
+          <option disabled="disabled" selected="selected">검색타입</option>
+          <option value="title">제목</option>
+          <option value="body">내용</option>
+          <option value="title,body">제목&내용</option>
+        </select>
+
+        <div class="relative">
+          <input name="searchKeyword" type="text" class="pr-16 ml-2 input input-bordered" placeholder="검색어를 입력"
+            maxlength="20" value="${param.searchKeyword}" />
+          <button class="absolute top-0 right-0 rounded-l-none btn btn-primary">검색</button>
+        </div>
+      </form>
+    </div>
+    <div class="overflow-x-auto">
       <table class="table table-fixed w-full">
         <colgroup>
           <col width="50" />
@@ -39,23 +60,23 @@
     </div>
     <div class="page-menu mt-3 ">
       <div class="btn-group justify-center">
-        <c:set var="pageMenuArmLen" value="5"/>
-        <c:set var="startPage" value="${page - pageMenuArmLen >= 1 ? page - pageMenuArmLen : 1}"/>
-        <c:set var="endPage" value="${page + pageMenuArmLen <= pagesCount ? page + pageMenuArmLen : pagesCount }"/>
-        
+        <c:set var="pageMenuArmLen" value="5" />
+        <c:set var="startPage" value="${page - pageMenuArmLen >= 1 ? page - pageMenuArmLen : 1}" />
+        <c:set var="endPage" value="${page + pageMenuArmLen <= pagesCount ? page + pageMenuArmLen : pagesCount }" />
+
         <c:set var="pageBaseUri" value="?boardId=${boardId}" />
         <c:set var="pageBaseUri" value="${pageBaseUri}&searchKeywordTypeCode=${param.searchKeywordTypeCode}" />
         <c:set var="pageBaseUri" value="${pageBaseUri}&searchKeyword=${param.searchKeyword}" />
-        
+
         <c:if test="${page > 1 }">
-          <a class="btn btn-xs" href="${pageBaseUri}&page=1"><<</a>          
+          <a class="btn btn-xs" href="${pageBaseUri}&page=1"><<</a>
         </c:if>
-       
+
         <c:forEach begin="${startPage}" end="${endPage}" var="i">
-          <a class="btn btn-xs ${page == i ? 'btn-active' : ''}" href="${pageBaseUri}&page=${i}">${i}</a>          
+          <a class="btn btn-xs ${page == i ? 'btn-active' : ''}" href="${pageBaseUri}&page=${i}">${i}</a>
         </c:forEach>
         <c:if test="${page != pagesCount }">
-          <a class="btn btn-xs" href="${pageBaseUri }&page=${pagesCount}">>></a>          
+          <a class="btn btn-xs" href="${pageBaseUri }&page=${pagesCount}">>></a>
         </c:if>
       </div>
     </div>

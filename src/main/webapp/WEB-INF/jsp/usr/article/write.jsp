@@ -21,7 +21,7 @@
             <th>게시판</th>
             <td>
               <select class="select select-bordered" name="boardId">
-                <option selected disabled>게시판 선택</option>              
+                <option selected disabled value="#">게시판 선택</option>              
                 <option value="1">공지사항</option>              
                 <option value="2">자유게시판</option>              
               </select>
