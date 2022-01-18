@@ -11,25 +11,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lee.exam.demo.service.ArticleService;
+import com.lee.exam.demo.service.BoardService;
 import com.lee.exam.demo.util.Ut;
 import com.lee.exam.demo.vo.Article;
+import com.lee.exam.demo.vo.Board;
 import com.lee.exam.demo.vo.ResultData;
 import com.lee.exam.demo.vo.Rq;
 
 @Controller
 public class UsrArticleController {
-	// 인스턴스 변수 시작
-	@Autowired
 	private ArticleService articleService;
-
+	private BoardService boardService;
+	
+	public UsrArticleController(ArticleService articleService, BoardService boardService) {
+		this.articleService = articleService;
+		this.boardService = boardService;
+	}
 
 	@RequestMapping("/usr/article/list")
-	public String showList(Model model, HttpServletRequest req) {
+	public String showList(Model model, HttpServletRequest req, int boardId) {
 		Rq rq = (Rq) req.getAttribute("rq");
-
-
-		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId());
 		
+		Board board = boardService.getBoardById(boardId);
+		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId());
+
+		model.addAttribute("board", board);
 		model.addAttribute("articles",articles);
 		return "usr/article/list";
 	}
