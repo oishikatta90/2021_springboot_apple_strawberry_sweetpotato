@@ -108,6 +108,12 @@
 		delete from article
 		where id =#{id}
 	</delete>
+	
+	<update id="increaseHitCount">
+		UPDATE article
+		SET hitCount = hitCount + 1
+		WHERE id = #{id}
+	</update>
 
 	<!-- @Select("select * from article where id = #{id}") @Select("select * 
 		from article order by id desc") @Select("select last_insert_id()") @Delete("delete 

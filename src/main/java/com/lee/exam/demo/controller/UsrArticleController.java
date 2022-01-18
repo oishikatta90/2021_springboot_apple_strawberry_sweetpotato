@@ -56,6 +56,11 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(Model model, int id) {
+		ResultData<Integer> increaseHitCountRd = articleService.increaseHitCount(id);
+		
+		if (increaseHitCountRd.isFail()) {
+			return rq.historyBackJsOnView("존재하지 않는 게시물입니다.");
+		}
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		model.addAttribute("article", article);
@@ -66,8 +71,9 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/getArticle")
 	@ResponseBody
 	public ResultData<Article> getArticle(int id) {
-
-		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
+		
+		int actorId = rq.getLoginedMemberId();
+		Article article = articleService.getForPrintArticle(actorId, id);
 
 		if (article == null) {
 

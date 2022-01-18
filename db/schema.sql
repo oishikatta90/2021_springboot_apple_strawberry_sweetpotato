@@ -141,3 +141,7 @@ from article;
 
 select count(*) from article;
 */
+
+#게시물 테이블 조회수 칼럼을 추가
+ALTER TABLE article
+ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0;
