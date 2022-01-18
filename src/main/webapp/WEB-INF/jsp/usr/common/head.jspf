@@ -71,6 +71,6 @@
 	
 	<section>
 		<div class="container mx-auto px-3 mt-5">
-			<h1>${pageTitle }페이지</h1>
+			<h1>${pageTitle } 페이지</h1>
 		</div>
 	</section>
