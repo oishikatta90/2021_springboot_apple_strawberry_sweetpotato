@@ -9,7 +9,7 @@ import com.lee.exam.demo.vo.Article;
 
 @Mapper
 public interface ArticleRepository {
-	public void writeArticle(@Param("title") String title, @Param("body") String body, @Param("memberId")int memberId);
+	public void writeArticle(@Param("title") String title, @Param("body") String body, @Param("memberId")int memberId, @Param("boardId")int boardId);
 
 	public Article getForPrintArticle(@Param("id") int id);
 

@@ -19,12 +19,17 @@ public class ArticleService {
 
 
 
-	public ResultData<Integer> writeArticle(String title, String body, int memberId) {
-		articleRepository.writeArticle(title, body, memberId);
+	public ResultData<Integer> writeArticle(String title, String body, int boardId, int loginedMemberId) {
+		articleRepository.writeArticle(title, body, loginedMemberId, boardId);
 		int id = articleRepository.getLastInsertId();
-		
 		return ResultData.from("S-1", Ut.f("%d번 게시물이 생성되었습니다.", id),"id", id);
 	}
+//	public ResultData<Integer> writeArticle(String title, String body, int memberId, int boardId) {
+//		articleRepository.writeArticle(title, body, memberId, boardId);
+//		int id = articleRepository.getLastInsertId();
+//		
+//		return ResultData.from("S-1", Ut.f("%d번 게시물이 생성되었습니다.", id),"id", id);
+//	}
 
 
 	public List<Article> getForPrintArticles(int actorId, int boardId) {
@@ -98,4 +103,8 @@ public class ArticleService {
 	public int getArticlesCount(int boardId) {
 		return articleRepository.getArticlesCount(boardId);
 	}
+
+
+
+
 }
