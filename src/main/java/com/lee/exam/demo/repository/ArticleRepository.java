@@ -20,4 +20,6 @@ public interface ArticleRepository {
 	public void deleteArticle(@Param("id") int id);
 
 	public void modifyArticle(int id, String title, String body);
+
+	public int getArticlesCount(@Param("boardId")int boardId);
 }

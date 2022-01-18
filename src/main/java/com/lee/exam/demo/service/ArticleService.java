@@ -71,8 +71,6 @@ public class ArticleService {
 		return ResultData.from("S-1", Ut.f("%d번 게시물을 수정하였습니다.", id),"article", article);
 	}
 
-
-
 	public ResultData actorCanModify(int actorId, Article article) {
 		if (article == null) {
 			return ResultData.from("F-1", "권한이 없습니다.");
@@ -83,8 +81,6 @@ public class ArticleService {
 		}
 		
 		return ResultData.from("S-1", "수정 가능합니다.");
-		
-		
 	}
 	
 	public ResultData actorCanDelete(int actorId, Article article) {
@@ -97,7 +93,9 @@ public class ArticleService {
 		}
 		
 		return ResultData.from("S-1", "게시물 삭제가 가능합니다.");
-		
-		
+	}
+
+	public int getArticlesCount(int boardId) {
+		return articleRepository.getArticlesCount(boardId);
 	}
 }
