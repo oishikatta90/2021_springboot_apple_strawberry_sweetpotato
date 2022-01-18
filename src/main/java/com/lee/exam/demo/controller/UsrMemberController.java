@@ -1,10 +1,8 @@
 package com.lee.exam.demo.controller;
 
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,8 +15,13 @@ import com.lee.exam.demo.vo.Rq;
 
 @Controller
 public class UsrMemberController {
-	@Autowired
 	private MemberService memberService;
+	private Rq rq;
+	
+	public UsrMemberController(MemberService memberService, Rq rq) {
+		this.memberService = memberService;
+		this.rq = rq;
+	}
 	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
@@ -61,8 +64,7 @@ public class UsrMemberController {
 	}
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(HttpServletRequest req, String loginId, String loginPw) {
-		Rq rq = (Rq)req.getAttribute("rq");
+	public String doLogin(String loginId, String loginPw) {
 		//로그인을 하면 세션에 loginedMemberId 이름으로
 		//로그인 아이디가 저장된다. if문으로 저장된 값이 있냐
 		//물었을 때 있으면 isLogined를 true로 바꿔줘서 로그인 중으로 표시
@@ -97,9 +99,7 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody
-	public String doLogout(HttpServletRequest req) {
-		Rq rq = (Rq)req.getAttribute("rq");
-		
+	public String doLogout() {
 		if (!rq.isLogined()) {
 			return rq.jsHistoryBack("이미 로그아웃 하셨습니다.");
 		}
