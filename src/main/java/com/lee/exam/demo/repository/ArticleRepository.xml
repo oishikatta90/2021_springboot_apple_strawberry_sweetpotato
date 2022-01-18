@@ -4,17 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.lee.exam.demo.repository.ArticleRepository">
+<mapper
+	namespace="com.lee.exam.demo.repository.ArticleRepository">
 	<insert id="writeArticle">
-		insert into article 
-		set regDate=now(), 
-		updateDate=now(), 
+		insert into article
+		set regDate=now(),
+		updateDate=now(),
 		memberId = #{memberId},
 		boardId = #{boardId},
-		title= #{title}, 
+		title= #{title},
 		`body`= #{body}
 	</insert>
-	
+
 	<select id="getForPrintArticle" resultType="Article">
 		SELECT A.*,
 		M.nickname AS extra__writerName
@@ -24,12 +25,13 @@
 		WHERE 1
 		AND A.id =#{id}
 	</select>
-	
+
 	<select id="getForPrintArticles" resultType="Article">
 		SELECT A.*,
 		M.nickname AS extra__writerName
 		FROM article AS A
-		LEFT JOIN member AS M
+		LEFT JOIN
+		member AS M
 		ON A.memberId = M.id
 		WHERE 1
 		<if test="boardId != 0">
@@ -40,49 +42,58 @@
 			LIMIT #{limitStart}, #{limitTake}
 		</if>
 	</select>
-	
+
 	<select id="getLastInsertId" resultType="int">
 		SELECT LAST_INSERT_ID()
 	</select>
-	
+
 	<select id="getArticlesCount" resultType="int">
 		SELECT COUNT(*) AS cnt
 		FROM article AS A
 		WHERE 1
 		<if test="boardId != 0">
 			AND A.boardId = #{boardId}
-		</if>	
+		</if>
+		<if test="searchKeyword != ''">
+			<choose>
+				<when test="searchKeywordTypeCode == 'title'">
+					AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+				</when>
+				<when test="searchKeywordTypeCode == 'body'">
+					AND A.body LIKE CONCAT('%', #{searchKeyword}, '%')
+				</when>
+				<otherwise>
+					AND (
+					A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR
+					A.body LIKE CONCAT('%', #{searchKeyword}, '%')
+					)
+				</otherwise>
+			</choose>
+		</if>
 	</select>
-	
+
 	<update id="modifyArticle">
-		update article 
+		update article
 		<set>
 			<if test='title != null and title != " "'>
-			title = #{title}, 
+				title = #{title},
 			</if>
 			<if test='body != null and body != " "'>
-			`body` =#{body},
+				`body` =#{body},
 			</if>
 			updateDate = now()
 		</set>
 		where id = #{id}
 	</update>
-	
+
 	<delete id="deleteArticle">
 		delete from article
 		where id =#{id}
 	</delete>
-	
-	<!--   
-	
-	@Select("select * from article where id = #{id}")
 
-	@Select("select * from article order by id desc")
-	
-	@Select("select last_insert_id()")
-	
-	@Delete("delete from article where id = #{id}")
-	
-	@Update("update article set title = #{title}, `body` =#{body} where id = #{id}")
-	-->
+	<!-- @Select("select * from article where id = #{id}") @Select("select * 
+		from article order by id desc") @Select("select last_insert_id()") @Delete("delete 
+		from article where id = #{id}") @Update("update article set title = #{title}, 
+		`body` =#{body} where id = #{id}") -->
 </mapper>

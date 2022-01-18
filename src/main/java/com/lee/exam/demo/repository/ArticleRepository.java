@@ -21,5 +21,5 @@ public interface ArticleRepository {
 
 	public void modifyArticle(int id, String title, String body);
 
-	public int getArticlesCount(@Param("boardId")int boardId);
+	public int getArticlesCount(@Param("boardId")int boardId, String searchKeywordTypeCode, String searchKeyword);
 }
