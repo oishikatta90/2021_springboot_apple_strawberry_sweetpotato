@@ -43,11 +43,11 @@
     </div>
     <div class="page-menu mt-3 ">
       <div class="btn-group justify-center">
-        <a class="btn btn-xs" href="?page=1"><<</a>          
-        <c:forEach begin="1" end="20" var="i">
-          <a class="btn btn-xs ${param.page == i ? 'btn-active' : ''}" href="?page=${i}">${i}</a>          
+        <a class="btn btn-xs" href="?boardId=${boardId }&page=1"><<</a>          
+        <c:forEach begin="1" end="${pagesCount }" var="i">
+          <a class="btn btn-xs ${page == i ? 'btn-active' : ''}" href="?boardId=${boardId }&page=${i}">${i}</a>          
         </c:forEach>
-        <a class="btn btn-xs" href="?page=20">>></a>          
+        <a class="btn btn-xs" href="?page=">>></a>          
       </div>
     </div>
   </div>
