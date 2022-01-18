@@ -36,6 +36,9 @@
 			AND A.boardId = #{boardId}
 		</if>
 		ORDER BY A.id DESC
+		<if test="limitStart != 0 or limitTake != 0">
+			LIMIT #{limitStart}, #{limitTake}
+		</if>
 	</select>
 	
 	<select id="getLastInsertId" resultType="int">

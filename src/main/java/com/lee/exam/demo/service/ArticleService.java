@@ -32,8 +32,20 @@ public class ArticleService {
 //	}
 
 
-	public List<Article> getForPrintArticles(int actorId, int boardId) {
-		List<Article> articles =  articleRepository.getForPrintArticles(boardId);
+	public List<Article> getForPrintArticles(int actorId, int boardId, int itemsCountInAPage, int page) {
+		/*
+		 * SELECT *
+		 * FROM article
+		 * WHERE boardId = #{boardId}
+		 * ORDER BY id DESC
+		 * LIMIT 0, 10
+		 * 
+		 */
+		
+		int limitStart = (page - 1) * itemsCountInAPage;
+		int limitTake = itemsCountInAPage;
+		
+		List<Article> articles =  articleRepository.getForPrintArticles(boardId, limitStart, limitTake);
 		
 		for (Article article : articles) {
 			updateForPrintData(actorId, article);
@@ -58,8 +70,10 @@ public class ArticleService {
 		}
 		
 		ResultData actorCanDeleteRd = actorCanDelete(actorId, article);
-		
 		article.setExtra__actorCanDelete(actorCanDeleteRd.isSuccess());
+
+		ResultData actorCanModifyRd = actorCanModify(actorId, article);
+		article.setExtra__actorCanModify(actorCanModifyRd.isSuccess());
 	}
 
 	public void deleteArticle(int id) {
