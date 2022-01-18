@@ -44,10 +44,14 @@
     <div class="page-menu mt-3 ">
       <div class="btn-group justify-center">
         <a class="btn btn-xs" href="?boardId=${boardId }&page=1"><<</a>          
-        <c:forEach begin="1" end="${pagesCount }" var="i">
+        <c:set var="pageMenuArmLen" value="3"/>
+        <c:set var="startPage" value="${page - pageMenuArmLen >= 1 ? page - pageMenuArmLen : 1}"/>
+        <c:set var="endPage" value="${page + pageMenuArmLen <= pagesCount ? page + pageMenuArmLen : pagesCount }"/>
+       
+        <c:forEach begin="${startPage}" end="${endPage}" var="i">
           <a class="btn btn-xs ${page == i ? 'btn-active' : ''}" href="?boardId=${boardId }&page=${i}">${i}</a>          
         </c:forEach>
-        <a class="btn btn-xs" href="?page=">>></a>          
+        <a class="btn btn-xs" href="?boardId=${boardId }&page=${pagesCount}">>></a>          
       </div>
     </div>
   </div>
