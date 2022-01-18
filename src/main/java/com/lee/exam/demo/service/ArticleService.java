@@ -32,20 +32,18 @@ public class ArticleService {
 //	}
 
 
-	public List<Article> getForPrintArticles(int actorId, int boardId, int itemsCountInAPage, int page) {
+	public List<Article> getForPrintArticles(int actorId, int boardId, int itemsCountInAPage, int page, String searchKeywordTypeCode, String searchKeyword) {
 		/*
 		 * SELECT *
 		 * FROM article
 		 * WHERE boardId = #{boardId}
 		 * ORDER BY id DESC
 		 * LIMIT 0, 10
-		 * 
 		 */
-		
 		int limitStart = (page - 1) * itemsCountInAPage;
 		int limitTake = itemsCountInAPage;
 		
-		List<Article> articles =  articleRepository.getForPrintArticles(boardId, limitStart, limitTake);
+		List<Article> articles =  articleRepository.getForPrintArticles(boardId,searchKeywordTypeCode, searchKeyword, limitStart, limitTake);
 		
 		for (Article article : articles) {
 			updateForPrintData(actorId, article);
