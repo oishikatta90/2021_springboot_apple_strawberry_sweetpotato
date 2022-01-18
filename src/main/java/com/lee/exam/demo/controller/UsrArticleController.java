@@ -45,8 +45,6 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(Model model, int id) {
-
-		
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 		
 		model.addAttribute("article",article);
@@ -149,7 +147,7 @@ public class UsrArticleController {
 		int id = writeArticleRd.getData1();
 
 		if (Ut.empty(replaceUri)) {
-			replaceUri = Ut.f("../article/list");
+			replaceUri = Ut.f("../article/detail?id=%d", id);
 		}
 		return rq.jsReplace(Ut.f("%d번 게시물이 작성 되었습니다.", id),replaceUri);
 	}

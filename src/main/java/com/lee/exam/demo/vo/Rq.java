@@ -118,4 +118,14 @@ public class Rq {
 				"</script> \n"
 				, msg, uri);
 	}
+	
+	//이 메서드는 Rq객체가 자연스럽게 생성 되도록 유도하는 역할을 한다.
+	//지우면 X, 편의를 위해 BeforActionInterceptor에서
+	//꼭 호출하도록 해야한다. 
+	//이 메서드는 그냥 아무 의미가 없고 Rq자체를 깨우는 역할을 한다.
+	public void initOnBeforeActionInterceptor() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
