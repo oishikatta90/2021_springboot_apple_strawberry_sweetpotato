@@ -7,7 +7,7 @@
 <section class="mt-5">
   <div class="container mx-auto px-3">
     <form class="table-box-type-1" method="post" action="../article/doWrite">
-      <table>
+      <table class="">
         <colgroup>
           <col width="200"/>
         </colgroup>
