@@ -114,6 +114,12 @@
 		SET hitCount = hitCount + 1
 		WHERE id = #{id}
 	</update>
+	
+	<select id="getArticleHitCount" resultType="int">
+		SELECT hitCount
+		FROM article
+		WHERE id = #{id}
+	</select>
 
 	<!-- @Select("select * from article where id = #{id}") @Select("select * 
 		from article order by id desc") @Select("select last_insert_id()") @Delete("delete 
