@@ -12,22 +12,22 @@
 <script>
 	function ArticleDetail__increaseHitCount() {
 		const localStorageKey = 'article__${params.id}__viewDone';
-		
-		if ( localStorage.getItem(localStorageKey) ) {
+
+		if (localStorage.getItem(localStorageKey)) {
 			return;
 		}
-		
+
 		localStorage.setItem(localStorageKey, true);
 		$.get('../article/doIncreaseHitCountRd', {
 			id : params.id,
-			ajaxMode: 'Y'
+			ajaxMode : 'Y'
 		}, function(data) {
 			$('.article-detail__hit-count').empty().html(data.data1);
 		}, 'json');
 	}
-	
+
 	$(function() {
-	ArticleDetail__increaseHitCount();
+		ArticleDetail__increaseHitCount();
 	});
 </script>
 
@@ -38,7 +38,6 @@
         <colgroup>
           <col width="200" />
         </colgroup>
-
         <tbody>
           <tr>
             <th>번호</th>
@@ -63,7 +62,20 @@
           <tr>
           <tr>
             <th>추천</th>
-            <td><span class="badge badge-primary article-detail__hit-count">${article.extra__goodReactionPoint}</span></td>
+            <td>
+              <div class="flex items-center">
+                <span class="badge badge-primary article-detail__hit-count">${article.extra__goodReactionPoint}</span> <span>&nbsp;</span>
+
+                <c:if test="${actorCanMakeReactionPoint }">
+                  <div class="tooltip" data-tip="이 제품을 좋아합니다.">
+                    <button class="btn btn-xs btn-primary">좋아요 👍</button>
+                  </div>
+                  <div class="tooltip" data-tip="이 제품을 싫어합니다.">
+                    <button class="btn btn-xs btn-secondary">싫어요 👎</button>
+                  </div>
+                </c:if>
+              </div>
+            </td>
           </tr>
           <tr>
             <th>제목</th>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.lee.exam.demo.repository.ArticleRepository;
 import com.lee.exam.demo.util.Ut;
 import com.lee.exam.demo.vo.Article;
+import com.lee.exam.demo.vo.Member;
 import com.lee.exam.demo.vo.ResultData;
 
 @Service
@@ -129,6 +130,10 @@ public class ArticleService {
 	public int getArticleHitCount(int id) {
 
 		return articleRepository.getArticleHitCount(id);
+	}
+
+	public boolean actorCanMakeReactionPoint(int memberId, int id) {
+		return articleRepository.getSumReactionPointByMemberId(memberId, id) == 0;
 	}
 
 
