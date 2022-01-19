@@ -145,3 +145,63 @@ select count(*) from article;
 #게시물 테이블 조회수 칼럼을 추가
 ALTER TABLE article
 ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0;
+
+#like 테이블
+CREATE TABLE reactionPoint (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    memberId INT(10) UNSIGNED NOT NULL,
+    relTypeCode CHAR(30) NOT NULL COMMENT '관련 데이터 타입코드',
+    redId INT(10) UNSIGNED NOT NULL COMMENT '관련 데이터 번호',
+    `point` SMALLINT(2) NOT NULL
+);
+
+#like 테스트 데이터
+#1번 회원이 1번 아티클에 대해서 싫어요(-1)을 했다.
+INSERT INTO reactionPoint 
+SET regDate = NOW(),
+    updateDate = NOW(),
+    memberId = 1,
+    relTypeCode = 'article',
+    redId = 1,
+    `point` = -1;
+    
+#like 테스트 데이터
+#1번 회원이 2번 아티클에 대해서 좋아요를 했다.
+INSERT INTO reactionPoint 
+SET regDate = NOW(),
+    updateDate = NOW(),
+    memberId = 1,
+    relTypeCode = 'article',
+    redId = 2,
+    `point` = 1;
+    
+#like 테스트 데이터
+#2번 회원이 1번 아티클에 대해서 싫어요(-1)을 했다.
+INSERT INTO reactionPoint 
+SET regDate = NOW(),
+    updateDate = NOW(),
+    memberId = 2,
+    relTypeCode = 'article',
+    redId = 1,
+    `point` = -1;
+#like 테스트 데이터
+#2번 회원이 2번 아티클에 대해서 좋아요를 했다.
+INSERT INTO reactionPoint 
+SET regDate = NOW(),
+    updateDate = NOW(),
+    memberId = 2,
+    relTypeCode = 'article',
+    redId = 2,
+    `point` = 1;
+    
+#like 테스트 데이터
+#3번 회원이 1번 아티클에 대해서 좋아요를 했다.
+INSERT INTO reactionPoint 
+SET regDate = NOW(),
+    updateDate = NOW(),
+    memberId = 3,
+    relTypeCode = 'article',
+    redId = 1,
+    `point` = 1;
