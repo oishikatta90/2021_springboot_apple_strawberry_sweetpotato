@@ -1,17 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="pageTitle" value="게시물 내용" />
 <%@ include file="../common/head.jspf"%>
+
+<script>
+	const params = {};
+	params.id = parseInt('${param.id}');
+</script>
+
+<script>
+	function ArticleDetail__increaseHitCount() {
+		$.get('../article/doIncreaseHitCountRd', {
+			id : params.id,
+			ajaxMode: 'Y'
+		}, function(data) {
+			$('.article-detail__hit-count').empty().html(data.data1);
+		}, 'json');
+	}
+	
+	$(function() {
+	ArticleDetail__increaseHitCount();
+	});
+</script>
+
 <section class="mt-5">
   <div class="container mx-auto px-3">
     <div class="table-box-type-1">
       <table>
         <colgroup>
-          <col width="200"/>
+          <col width="200" />
         </colgroup>
-         
+
         <tbody>
           <tr>
             <th>번호</th>
@@ -31,7 +51,7 @@
           </tr>
           <tr>
             <th>조회수</th>
-            <td>${article.hitCount}</td>
+            <td><span class="badge badge-primary article-detail__hit-count">${article.hitCount}</span></td>
           </tr>
           <tr>
             <th>제목</th>
@@ -44,12 +64,13 @@
         </tbody>
       </table>
     </div>
-    
+
     <div class="btns">
       <button class="btn-text-link" type="button" onclick="history.back()">뒤로가기</button>
       <c:if test="${article.extra__actorCanDelete}">
-      <a class="btn-text-link" href="../article/modify?id=${article.id }">게시물 수정</a>
-      <a class="btn-text-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false  ) return false;" href="../article/doDelete?id=${article.id }">게시물 삭제</a>
+        <a class="btn-text-link" href="../article/modify?id=${article.id }">게시물 수정</a>
+        <a class="btn-text-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false  ) return false;"
+          href="../article/doDelete?id=${article.id }">게시물 삭제</a>
       </c:if>
     </div>
   </div>
