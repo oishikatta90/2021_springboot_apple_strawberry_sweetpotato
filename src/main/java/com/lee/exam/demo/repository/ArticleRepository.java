@@ -28,4 +28,8 @@ public interface ArticleRepository {
 	public int getArticleHitCount(int id);
 
 	public int getSumReactionPointByMemberId(int memberId, int id);
+
+	public int increaseGoodReactionPoint(int relId);
+
+	public int increaseBadReactionPoint(int relId);
 }

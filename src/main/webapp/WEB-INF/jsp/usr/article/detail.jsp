@@ -68,10 +68,10 @@
 
                 <c:if test="${actorCanMakeReactionPoint }">
                   <div class="tooltip" data-tip="이 제품을 좋아합니다.">
-                    <button class="btn btn-xs btn-primary">좋아요 👍</button>
+                    <a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs btn-primary">좋아요 👍</a>
                   </div>
                   <div class="tooltip" data-tip="이 제품을 싫어합니다.">
-                    <button class="btn btn-xs btn-secondary">싫어요 👎</button>
+                    <a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs btn-secondary">싫어요 👎</a>
                   </div>
                 </c:if>
               </div>

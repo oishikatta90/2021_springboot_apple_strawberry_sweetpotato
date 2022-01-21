@@ -24,6 +24,7 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer{
         // beforeActionInterceptor 인터셉터가 모든 액션 실행전에 실행되도록 처리
         registry.addInterceptor(beforeActionInterceptor)
                 .addPathPatterns("/**")
+                .excludePathPatterns("/favicon.ico")
                 .excludePathPatterns("/resource/**")
                 .excludePathPatterns("/error");
         
@@ -34,6 +35,8 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer{
         		.addPathPatterns("/usr/article/doDelete")
         		.addPathPatterns("/usr/article/modify")
         		.addPathPatterns("/usr/article/doModify")
+        		.addPathPatterns("/usr/reactionPoint/doGoodReaction")
+        		.addPathPatterns("/usr/reactionPoint/doBadReaction")
         		.addPathPatterns("/usr/reply/doWrite")
         		.addPathPatterns("/usr/reply/doDelete")
         		.addPathPatterns("/usr/reply/doDeleteAjax")
