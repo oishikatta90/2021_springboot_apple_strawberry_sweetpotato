@@ -123,14 +123,7 @@
 		WHERE id = #{id}
 	</select>
 	
-	<select id="getSumReactionPointByMemberId" resultType="int">
-		SELECT IFNULL(SUM(RP.point), 0) AS s
-		FROM reactionPoint AS RP
-		WHERE RP.relTypeCode = 'article'
-		AND RP.relId = #{id}
-		AND RP.memberID = #{memberId}		
-	
-	</select>
+
 
 	<!-- @Select("select * from article where id = #{id}") @Select("select * 
 		from article order by id desc") @Select("select last_insert_id()") @Delete("delete 

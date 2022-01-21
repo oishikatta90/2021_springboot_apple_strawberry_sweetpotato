@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lee.exam.demo.service.ArticleService;
 import com.lee.exam.demo.service.BoardService;
+import com.lee.exam.demo.service.ReactionPointService;
 import com.lee.exam.demo.util.Ut;
 import com.lee.exam.demo.vo.Article;
 import com.lee.exam.demo.vo.Board;
@@ -21,11 +22,13 @@ import com.lee.exam.demo.vo.Rq;
 public class UsrArticleController {
 	private ArticleService articleService;
 	private BoardService boardService;
+	private ReactionPointService reactionPointService;
 	private Rq rq;
 
-	public UsrArticleController(ArticleService articleService, BoardService boardService, Rq rq) {
+	public UsrArticleController(ArticleService articleService, BoardService boardService, Rq rq, ReactionPointService reactionPointService) {
 		this.articleService = articleService;
 		this.boardService = boardService;
+		this.reactionPointService = reactionPointService;
 		this.rq = rq;
 	}
 
@@ -64,7 +67,7 @@ public class UsrArticleController {
 		model.addAttribute("article", article);
 		
 		int memberId = rq.getLoginedMemberId();
-		boolean actorCanMakeReactionPoint = articleService.actorCanMakeReactionPoint(memberId,id);
+		boolean actorCanMakeReactionPoint = reactionPointService.actorCanMakeReactionPoint(memberId, "article", id);
 		model.addAttribute("actorCanMakeReactionPoint",actorCanMakeReactionPoint);
 
 		return "usr/article/detail";
