@@ -64,7 +64,7 @@
             <th>추천</th>
             <td>
               <div class="flex items-center">
-                <span class="badge badge-primary article-detail__hit-count">${article.extra__goodReactionPoint}</span> <span>&nbsp;</span>
+                <span class="badge badge-primary article-detail__hit-count">${article.goodReactionPoint}</span> <span>&nbsp;</span>
 
                 <c:if test="${actorCanMakeReactionPoint }">
                   <div class="tooltip" data-tip="이 제품을 좋아합니다.">
