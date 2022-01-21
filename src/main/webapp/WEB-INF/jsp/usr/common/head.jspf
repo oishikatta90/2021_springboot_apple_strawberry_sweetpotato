@@ -23,15 +23,15 @@
 	
 </script>
 </head>
-<body>
+<body class="flex flex-col">
 	<header>
-	  <div class="flex h-20 bg-red-500 container mx-auto">
-		<a href="/" class="bg-blue-500 flex items-center px-3">
+	  <div class="flex h-24 container mx-auto">
+		<a href="/" class="flex items-center px-3">
 			<span>로고</span>
 		</a>
 		<div class="flex-grow"></div>
 		
-		<ul class="flex bg-yellow-500">
+		<ul class="flex">
 			<li class="h-full hover:underline flex items-center px-3">
 				<a href="/">
 					<span>홈</span>
@@ -55,17 +55,22 @@
             <c:if test="${!rq.isLogined()}">
 			<li>
 				<a class="h-full hover:underline flex items-center px-3" href="/usr/member/login">
-					<span>로그인</span>
+					<span><i class="fas fa-key"></i> 로그인</span>
 				</a>
 			</li>
             </c:if>
             <c:if test="${rq.isLogined()}">
 			<li>
 				<a class="h-full hover:underline flex items-center px-3" href="/usr/member/doLogout">
-					<span>로그아웃</span>
+					<span><i class="fas fa-sign-out-alt"></i>  로그아웃</span>
 				</a>
 			</li>
             </c:if>
+            <li>
+              <a class="h-full hover:underline flex items-center px-3" href="/usr/member/signUp">
+                <span><i class="fas fa-user-plus"></i> 회원가입</span>
+              </a>
+   	        </li>
 		</ul>
 	  </div>
 	</header>

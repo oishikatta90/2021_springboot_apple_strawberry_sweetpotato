@@ -23,7 +23,7 @@
         <div class="relative">
           <input name="searchKeyword" type="text" class="pr-16 ml-2 input input-bordered" placeholder="검색어를 입력"
             maxlength="20" value="${param.searchKeyword}" />
-          <button class="absolute top-0 right-0 rounded-l-none btn btn-primary">검색</button>
+          <button class="absolute top-0 right-0 rounded-l-none btn">검색</button>
         </div>
       </form>
     </div>

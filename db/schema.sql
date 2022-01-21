@@ -146,6 +146,7 @@ select count(*) from article;
 ALTER TABLE article
 ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0;
 
+
 #like 테이블
 CREATE TABLE reactionPoint (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -153,18 +154,18 @@ CREATE TABLE reactionPoint (
     updateDate DATETIME NOT NULL,
     memberId INT(10) UNSIGNED NOT NULL,
     relTypeCode CHAR(30) NOT NULL COMMENT '관련 데이터 타입코드',
-    redId INT(10) UNSIGNED NOT NULL COMMENT '관련 데이터 번호',
+    relId INT(10) UNSIGNED NOT NULL COMMENT '관련 데이터 번호',
     `point` SMALLINT(2) NOT NULL
 );
 
 #like 테스트 데이터
 #1번 회원이 1번 아티클에 대해서 싫어요(-1)을 했다.
-INSERT INTO reactionPoint 
+INSERT INTO reactionPoint  
 SET regDate = NOW(),
     updateDate = NOW(),
     memberId = 1,
     relTypeCode = 'article',
-    redId = 1,
+    relId = 1,
     `point` = -1;
     
 #like 테스트 데이터
@@ -174,7 +175,7 @@ SET regDate = NOW(),
     updateDate = NOW(),
     memberId = 1,
     relTypeCode = 'article',
-    redId = 2,
+    relId = 2,
     `point` = 1;
     
 #like 테스트 데이터
@@ -184,7 +185,7 @@ SET regDate = NOW(),
     updateDate = NOW(),
     memberId = 2,
     relTypeCode = 'article',
-    redId = 1,
+    relId = 1,
     `point` = -1;
 #like 테스트 데이터
 #2번 회원이 2번 아티클에 대해서 좋아요를 했다.
@@ -193,7 +194,7 @@ SET regDate = NOW(),
     updateDate = NOW(),
     memberId = 2,
     relTypeCode = 'article',
-    redId = 2,
+    relId = 2,
     `point` = 1;
     
 #like 테스트 데이터
@@ -203,5 +204,38 @@ SET regDate = NOW(),
     updateDate = NOW(),
     memberId = 3,
     relTypeCode = 'article',
-    redId = 1,
+    relId = 1,
     `point` = 1;
+#게시물 테이블에 goodReac 칼럼 추가
+ALTER TABLE article
+ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
+
+#게시물 테이블에 badReac 칼럼 추가
+ALTER TABLE article
+ADD COLUMN badReactionPoint INT(10) NOT NULL DEFAULT 0;
+ 
+#각 게시물 별, 좋아요, 싫어요 총합
+/*   
+select RP.relId,
+       sum(if(RP.point > 0, RP.point, 0)) AS goodReactionPoint,
+       sum(if(RP.point < 0, RP.point * -1, 0)) AS badReactionPoint
+from reactionPoint AS RP
+where relTypeCode= 'article'
+group by RP.relTypeCode, RP.relId
+*/
+
+#기존 게시물 goodR, badR 필드에 값 채우기
+UPDATE article AS A
+INNER JOIN (
+    SELECT RP.relId,
+       SUM(IF(RP.point > 0, RP.point, 0)) AS goodReactionPoint,
+       SUM(IF(RP.point < 0, RP.point * -1, 0)) AS badReactionPoint
+    FROM reactionPoint AS RP
+    WHERE relTypeCode= 'article'
+    GROUP BY RP.relTypeCode, RP.relId
+) AS RP_SUM
+ON A.id = RP_SUM.relId
+SET A.goodReactionPoint = RP_SUM.goodReactionPoint,
+    A.badReactionPoint = RP_SUM.badReactionPoint;
+    
+    SELECT * FROM article;

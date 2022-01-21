@@ -58,9 +58,17 @@ public class UsrMemberController {
 		return ResultData.newData(joinRd,"member", member);
 	}
 	
+	@RequestMapping("/usr/member/signUp")
+	public String showSignUp(HttpSession httpSession) {
+		return "/usr/member/signUp";
+	}
+	@RequestMapping("/usr/member/doSignUp")
+	public String doSignUp(HttpSession httpSession) {
+		return "/usr/member/signUp";
+	}
 	@RequestMapping("/usr/member/login")
 	public String showLogin(HttpSession httpSession) {
-		return "/usr/member/login";
+		return "/usr/member/login2";
 	}
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody

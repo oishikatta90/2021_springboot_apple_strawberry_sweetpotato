@@ -1,6 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-</main>
+
+
+<footer class="footer">
+	<div class="footer-grid container mx-auto px-3">
+      <div class="footer-info">
+		<div class="footer-cell">
+          <h3 class="footer-h3">COMPANY</h3>
+          <ul>
+          	<li>제작자 : 이희원</li>
+          	<li>책임자 : 이희원</li>
+          </ul>
+        </div>
+        <div class="footer-cell">
+          <h3 class="footer-h3">CONTACT</h3>
+          <ul>
+          	<li>이메일 : abcd@gmail.com</li>
+          	<li>전화 : 010-0101-0101</li>
+          	<li>주소 : 부산광역시 중구 중앙동4가 87-7 </li>
+          </ul> 
+        </div>
+      </div>
+	</div>
+</footer>
 </body>
 </html>
