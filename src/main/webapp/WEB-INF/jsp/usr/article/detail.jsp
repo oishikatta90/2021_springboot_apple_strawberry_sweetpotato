@@ -109,4 +109,35 @@
     </div>
   </div>
 </section>
+
+
+<section class="mt-5 mb-5">
+  <div class="container mx-auto px-3">
+    <h1 class="container mx-auto px-3 mt-5">댓글작성</h1>
+    <c:if test="${rq.logined}">
+     <form class="table-box-type-1" method="post" action="../reply/doWrite">
+      <input type="hidden" name="relTypeCode" value="article" />
+      <input type="hidden" name="relId" value="${article.id}" />
+      <table class="">
+        <colgroup>
+          <col width="200"/>
+        </colgroup>
+         
+        <tbody>
+          <tr>
+            <th>${rq.loginedMember.nickName}</th>
+            <td>
+              <textarea required="required" class="w-full" name="body" rows="3" placeholder="내용" ></textarea>
+              <input type="submit" value="작성하기">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+   </c:if>
+   <c:if test="${rq.notLogined }">
+    <h1 class="container mx-auto px-3 mt-5"><a href="/usr/member/login" class="link link-primary">로그인</a> 후 이용 가능합니다.</h1>
+   </c:if>
+  </div>
+</section>
 <%@ include file="../common/foot.jspf"%>
