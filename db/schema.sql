@@ -272,3 +272,15 @@ SET regDate = NOW(),
     relTypeCode = 'article',
     relId = 1,
     `body` = '세 번째 댓글 테스트입니다.';
+
+#댓글에 좋아요 수, 싫어요 수 칼럼 추가
+ALTER TABLE reply
+ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
+    
+ALTER TABLE reply
+ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
+
+
+#고속 검색을 위해서 인덱스 걸기
+ALTER TABLE `reply` ADD KEY (`relTypeCode` , `relId`); 
+#select from reply where relTypeCode ='article' and relId =5
