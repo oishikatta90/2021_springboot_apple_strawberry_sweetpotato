@@ -94,7 +94,7 @@
           </tr>
           <tr>
             <th>내용</th>
-            <td>${article.body}</td>
+            <td>${article.forPrintBody}</td>
           </tr>
         </tbody>
       </table>
@@ -171,7 +171,31 @@
 
 <section class="mt-5 mb-5">
   <div class="container mx-auto px-3">
-    <h1 class="container mx-auto px-3 mt-5">댓글리스트(${repliesCount})</h1>
+    <h1 class="container mx-auto px-3 mt-5">댓글리스트(${replies.size()})</h1>
+      <table class="table table-fixed w-full">
+        <colgroup>
+          <col width="50" />
+          <col width="200" />
+          <col width="1270" />
+          <col />
+        </colgroup>
+        <thead>
+          <tr class="active align-top">
+            <th>번호</th>
+            <th>작성자</th>
+            <th>내용</th>
+          </tr>
+        </thead>
+        <tbody>
+          <c:forEach var="reply" items="${replies}">
+            <tr>
+              <th>${reply.id }</th>
+              <td>${reply.extra__writerName}</td>
+              <td>${reply.forPrintBody}</td>
+            </tr>
+          </c:forEach>
+        </tbody>
+      </table>
    </div>
 </section>
 <%@ include file="../common/foot.jspf"%>

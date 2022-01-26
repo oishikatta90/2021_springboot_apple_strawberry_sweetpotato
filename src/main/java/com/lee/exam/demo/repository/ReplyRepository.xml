@@ -18,7 +18,7 @@
 		SELECT LAST_INSERT_ID()
 	</select>
 	
-	<select id="getForPrintReplies" resultType="int">
+	<select id="getForPrintReplies" resultType="reply">
 		SELECT R.*,
 		M.nickName AS extra__writerName
 		FROM reply AS R
