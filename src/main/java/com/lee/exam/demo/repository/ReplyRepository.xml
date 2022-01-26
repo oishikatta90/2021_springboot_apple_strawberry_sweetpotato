@@ -18,4 +18,15 @@
 		SELECT LAST_INSERT_ID()
 	</select>
 	
+	<select id="getForPrintReplies" resultType="int">
+		SELECT R.*,
+		M.nickName AS extra__writerName
+		FROM reply AS R
+		LEFT JOIN `member` AS M
+		ON R.memberId = M.id
+		WHERE R.relTypeCode = #{relTypeCode}
+		AND R.relId = #{relId} 
+		ORDER BY R.id DESC
+	</select>
+	
 </mapper>

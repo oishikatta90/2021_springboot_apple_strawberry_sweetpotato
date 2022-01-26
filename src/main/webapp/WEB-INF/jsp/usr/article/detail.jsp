@@ -31,32 +31,6 @@
 	});
 </script>
 
-<script>
-	//댓글작성 관련
-  let ReplyWrite__submitFormDone = false;
-  function ReplyWrite__submitForm(form) {
-	if (ReplyWrite__submitFormDone) {
-		return;
-	}
-    //좌우 공백 제거
-	form.body.value = form.body.value.trim();
-    
-    if (form.body.value.length == 0) {
-    	alert('댓글을 입력해주세요.');
-    	form.body.focus();
-    	return;
-    }
-    if (form.body.value.length < 2) {
-    	alert('댓글 내용을 2자 이상 입력해주세요.');
-    	form.body.focus();
-    	return;
-    }
-    
-    ReplyWrite__submitFormDone = true;
-    form.submit();
-    
-  }
-</script>
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
@@ -137,6 +111,32 @@
   </div>
 </section>
 
+<script>
+  //댓글작성 관련
+  let ReplyWrite__submitFormDone = false;
+  function ReplyWrite__submitForm(form) {
+  if (ReplyWrite__submitFormDone) {
+    return;
+  }
+    //좌우 공백 제거
+  form.body.value = form.body.value.trim();
+    
+    if (form.body.value.length == 0) {
+      alert('댓글을 입력해주세요.');
+      form.body.focus();
+      return;
+    }
+    if (form.body.value.length < 2) {
+      alert('댓글 내용을 2자 이상 입력해주세요.');
+      form.body.focus();
+      return;
+    }
+    
+    ReplyWrite__submitFormDone = true;
+    form.submit();
+    
+  }
+</script>
 
 <section class="mt-5 mb-5">
   <div class="container mx-auto px-3">
@@ -167,5 +167,11 @@
     <h1 class="container mx-auto px-3 mt-5"><a href="/usr/member/login" class="link link-primary">로그인</a> 후 이용 가능합니다.</h1>
    </c:if>
   </div>
+</section>
+
+<section class="mt-5 mb-5">
+  <div class="container mx-auto px-3">
+    <h1 class="container mx-auto px-3 mt-5">댓글리스트(${repliesCount})</h1>
+   </div>
 </section>
 <%@ include file="../common/foot.jspf"%>
