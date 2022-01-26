@@ -10,16 +10,25 @@ public class ReactionPointService {
 	private ReactionPointRepository reactionPointRepository;
 	private ArticleService articleService;
 
-	public ReactionPointService(ReactionPointRepository reactionPointRepository, ArticleService aritlcArticleService) {
+	public ReactionPointService(ReactionPointRepository reactionPointRepository, ArticleService articleService) {
 		this.reactionPointRepository = reactionPointRepository;
-		this.articleService = aritlcArticleService;
+		this.articleService = articleService;
+	}   
+
+	public ResultData actorCanMakeReactionPoint(int memberId, String relTypeCode, int relId) {
+		if (memberId == 0) {
+			return ResultData.from("F-1", "로그인 후 이용해주세요.");
+		}
+		int  SumReactionPointByMemberId = reactionPointRepository.getSumReactionPointByMemberId(memberId, relTypeCode, relId);
+		
+		if (SumReactionPointByMemberId != 0) {
+			return ResultData.from("F-2", "리액션이 불가능합니다.","sumReactionPointByMemberId",SumReactionPointByMemberId);
+		}
+		
+		return ResultData.from("S-1", "리액션이 가능합니다.","sumReactionPointByMemberId",SumReactionPointByMemberId);
 	}
 
-	public boolean actorCanMakeReactionPoint(int memberId, String relTypeCode, int relId) {
-			return reactionPointRepository.getSumReactionPointByMemberId(memberId, relTypeCode, relId) == 0;
-		}
-
-	public ResultData addGoodReactionPoint(int memberId, String relTypeCode, int relId) {
+	public ResultData addGoodReactionPoint(int memberId, String relTypeCode, int relId) {    
 		reactionPointRepository.addGoodReactionPoint(memberId, relTypeCode, relId);
 		
 		switch(relTypeCode) {
