@@ -10,10 +10,14 @@ import com.lee.exam.demo.vo.Reply;
 @Mapper
 public interface ReplyRepository {
 
-	void writeReply(String relTypeCode, int relId, String body, int memberId);
+	public void writeReply(String relTypeCode, int relId, String body, int memberId);
 
-	int getLastInsertId();
+	public int getLastInsertId();
 
-	List<Reply> getForPrintReplies(Member loginedMember, String relTypeCode, int relId);
+	public List<Reply> getForPrintReplies(Member loginedMember, String relTypeCode, int relId);
+
+	public Reply getForPrintReply(int memberId, int id);
+
+	public void deleteReply(int id);
 
 }

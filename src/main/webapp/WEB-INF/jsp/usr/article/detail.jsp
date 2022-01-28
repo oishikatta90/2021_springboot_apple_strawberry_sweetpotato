@@ -69,22 +69,30 @@
 
                 <c:if test="${actorCanMakeReactionPoint }">
                   <div class="tooltip" data-tip="이 제품을 좋아합니다.">
-                    <a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs btn-primary btn-outline">좋아요 👍</a>
+                    <a
+                      href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
+                      class="btn btn-xs btn-primary btn-outline">좋아요 👍</a>
                   </div>
                   <div class="tooltip" data-tip="이 제품을 싫어합니다.">
-                    <a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs btn-secondary btn-outline">싫어요 👎</a>
+                    <a
+                      href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+                      class="btn btn-xs btn-secondary btn-outline">싫어요 👎</a>
                   </div>
                 </c:if>
-              
+
                 <c:if test="${actorCanMakeCancleGoodReactionPoint }">
                   <div class="tooltip" data-tip="이 제품을 좋아합니다.">
-                    <a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs btn-primary">좋아요 👍</a>
+                    <a
+                      href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
+                      class="btn btn-xs btn-primary">좋아요 👍</a>
                   </div>
                   <div class="tooltip" data-tip="이 제품을 싫어합니다.">
-                    <a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs btn-secondary btn-outline btn-disabled>">싫어요 👎</a>
+                    <a
+                      href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+                      class="btn btn-xs btn-secondary btn-outline btn-disabled>">싫어요 👎</a>
                   </div>
                 </c:if>
-               
+
               </div>
             </td>
           </tr>
@@ -112,30 +120,30 @@
 </section>
 
 <script>
-  //댓글작성 관련
-  let ReplyWrite__submitFormDone = false;
-  function ReplyWrite__submitForm(form) {
-  if (ReplyWrite__submitFormDone) {
-    return;
-  }
-    //좌우 공백 제거
-  form.body.value = form.body.value.trim();
-    
-    if (form.body.value.length == 0) {
-      alert('댓글을 입력해주세요.');
-      form.body.focus();
-      return;
-    }
-    if (form.body.value.length < 2) {
-      alert('댓글 내용을 2자 이상 입력해주세요.');
-      form.body.focus();
-      return;
-    }
-    
-    ReplyWrite__submitFormDone = true;
-    form.submit();
-    
-  }
+	//댓글작성 관련
+	let ReplyWrite__submitFormDone = false;
+	function ReplyWrite__submitForm(form) {
+		if (ReplyWrite__submitFormDone) {
+			return;
+		}
+		//좌우 공백 제거
+		form.body.value = form.body.value.trim();
+
+		if (form.body.value.length == 0) {
+			alert('댓글을 입력해주세요.');
+			form.body.focus();
+			return;
+		}
+		if (form.body.value.length < 2) {
+			alert('댓글 내용을 2자 이상 입력해주세요.');
+			form.body.focus();
+			return;
+		}
+
+		ReplyWrite__submitFormDone = true;
+		form.submit();
+
+	}
 </script>
 
 <section class="mt-5 mb-5">
@@ -143,59 +151,71 @@
     <h1 class="container mx-auto px-3 mt-5">댓글작성</h1>
 
     <c:if test="${rq.logined}">
-     <form class="table-box-type-1" method="post" action="../reply/doWrite" onsubmit="ReplyWrite__submitForm(this); return false;">
-      <input type="hidden" name="relTypeCode" value="article" />
-      <input type="hidden" name="relId" value="${article.id}" />
-      <table class="">
-        <colgroup>
-          <col width="200"/>
-        </colgroup>
-         
-        <tbody>
-          <tr>
-            <th>${rq.loginedMember.nickName}</th>
-            <td>
-              <textarea class="w-full" name="body" rows="3" placeholder="내용" ></textarea>
-              <input type="submit" value="작성하기">
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </form>
-   </c:if>
-   <c:if test="${rq.notLogined }">
-    <h1 class="container mx-auto px-3 mt-5"><a href="/usr/member/login" class="link link-primary">로그인</a> 후 이용 가능합니다.</h1>
-   </c:if>
+      <form class="table-box-type-1" method="post" action="../reply/doWrite"
+        onsubmit="ReplyWrite__submitForm(this); return false;">
+        <input type="hidden" name="relTypeCode" value="article" /> <input type="hidden" name="relId"
+          value="${article.id}" />
+        <table class="">
+          <colgroup>
+            <col width="200" />
+          </colgroup>
+
+          <tbody>
+            <tr>
+              <th>${rq.loginedMember.nickName}</th>
+              <td><textarea class="w-full" name="body" rows="3" placeholder="내용"></textarea> <input type="submit"
+                value="작성하기"></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </c:if>
+    <c:if test="${rq.notLogined }">
+      <h1 class="container mx-auto px-3 mt-5">
+        <a href="/usr/member/login" class="link link-primary">로그인</a> 후 이용 가능합니다.
+      </h1>
+    </c:if>
   </div>
 </section>
 
 <section class="mt-5 mb-5">
   <div class="container mx-auto px-3">
     <h1 class="container mx-auto px-3 mt-5">댓글리스트(${replies.size()})</h1>
-      <table class="table table-fixed w-full">
-        <colgroup>
-          <col width="50" />
-          <col width="200" />
-          <col width="1270" />
-          <col />
-        </colgroup>
-        <thead>
-          <tr class="active align-top">
-            <th>번호</th>
-            <th>작성자</th>
-            <th>내용</th>
+    <table class="table table-fixed">
+      <colgroup>
+        <col width="50" />
+        <col width="200" />
+        <col width="1170" />
+        <col width="100" />
+        <col />
+      </colgroup>
+      <thead>
+        <tr class="active align-top">
+          <th>번호</th>
+          <th>작성자</th>
+          <th>내용</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <c:forEach var="reply" items="${replies}">
+          <input type="hidden" name="relId" value="${article.id}" />
+          <tr>
+            <th>${reply.id }</th>
+            <td>${reply.extra__writerName}</td>
+            <td>${reply.forPrintBody}</td>
+            <c:if test="${reply.extra__actorCanDelete}">
+              <td><a class="btn-text-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false  ) return false;"
+                href="../reply/doDelete?id=${reply.id }">삭제</a></td>
+            </c:if>
+            <c:if test="${reply.extra__actorCanDelete}">
+              <td><a class="btn-text-link" href="../reply/modify?id=${reply.id }">수정</a></td>
+            </c:if>
           </tr>
-        </thead>
-        <tbody>
-          <c:forEach var="reply" items="${replies}">
-            <tr>
-              <th>${reply.id }</th>
-              <td>${reply.extra__writerName}</td>
-              <td>${reply.forPrintBody}</td>
-            </tr>
-          </c:forEach>
-        </tbody>
-      </table>
-   </div>
+        </c:forEach>
+      </tbody>
+    </table>
+  </div>
 </section>
 <%@ include file="../common/foot.jspf"%>
