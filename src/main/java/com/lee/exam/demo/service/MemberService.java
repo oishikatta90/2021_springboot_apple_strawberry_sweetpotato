@@ -10,9 +10,11 @@ import com.lee.exam.demo.vo.ResultData;
 @Service
 public class MemberService {	
 	private MemberRepository memberRepository;
+	private AttrService attrService;
 	
-	public MemberService(MemberRepository memberRepository) {
+	public MemberService(MemberRepository memberRepository, AttrService attrService) {
 		this.memberRepository = memberRepository;
+		this.attrService = attrService;
 	}
 	
 
@@ -58,5 +60,12 @@ public class MemberService {
 	}
 
 
+	public String genMemberModifyAuthKey(int actorId) {
+		String memberModifyAuthKey = Ut.getTempPassword(10);
+
+		attrService.setValue("member", actorId, "extra", "memberModifyAuthKey", memberModifyAuthKey, Ut.getDateStrLater(60 * 5));
+
+		return memberModifyAuthKey;
+	}
 
 }
