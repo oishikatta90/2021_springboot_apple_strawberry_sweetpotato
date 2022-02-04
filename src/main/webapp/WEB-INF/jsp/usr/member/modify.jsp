@@ -75,6 +75,7 @@
 <section class="mt-5">
   <form class="container mx-auto px-3" method="POST" action="../member/doModify" onsubmit="MemberModify__submit(this); return false;">
    <input type="hidden" name="id" value="${rq.loginedMember.id }" />
+   <input type="hidden" name="memberModifyAuthKey" value="${param.memberModifyAuthKey}" />
     <div class="table-box-type-1">
       <table>
         <colgroup>
