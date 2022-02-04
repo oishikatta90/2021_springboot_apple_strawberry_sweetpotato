@@ -17,6 +17,12 @@
 	<select id="getLastInsertId" resultType="int">
 		SELECT LAST_INSERT_ID()
 	</select>
+	
+	<select id="getReply">
+		SELECT R.*
+		FROM reply AS R
+		WHERE R.id = #{id}
+	</select>
 
 	<select id="getForPrintReply" resultType="Reply">
 		SELECT * FROM reply AS R 

@@ -65,7 +65,7 @@ public class ReplyService {
 	private ResultData actorCanModify(Member loginedMember, Reply reply) {
 		if (loginedMember == null) {
 			return ResultData.from("F-1", "댓글이 존재하지 않습니다.");
-		}
+		}  
 		
 		if (reply.getMemberId() != loginedMember.getId()) {
 			return ResultData.from("F-2", "권한이 없습니다.");
@@ -79,5 +79,9 @@ public class ReplyService {
 
 	public void deleteReply(int id) {
 		replyRepository.deleteReply(id);
+	}
+
+	public Reply getReply(int id) {
+		return replyRepository.getReply(id);  
 	}
 }

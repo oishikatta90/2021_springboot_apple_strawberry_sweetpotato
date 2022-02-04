@@ -1,13 +1,13 @@
 package com.lee.exam.demo.controller;
 
 
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lee.exam.demo.service.ArticleService;
 import com.lee.exam.demo.service.ReplyService;
 import com.lee.exam.demo.util.Ut;
 import com.lee.exam.demo.vo.Article;
@@ -19,9 +19,11 @@ import com.lee.exam.demo.vo.Rq;
 public class UsrReplyController {
 	private ReplyService replyService;
 	private Rq rq;
+	private ArticleService articleService;
 
-	public UsrReplyController(Rq rq, ReplyService replyService) {
+	public UsrReplyController(Rq rq, ReplyService replyService, ArticleService articleService) {
 		this.replyService = replyService;
+		this.articleService = articleService;
 		this.rq = rq;
 	}
 	
@@ -56,21 +58,49 @@ public class UsrReplyController {
 	@RequestMapping("/usr/reply/doDelete")
 	@ResponseBody
 	public String doDelete(int id, String replaceUri) {
-		int relId;
 		Reply reply = replyService.getForPrintReply(rq.getLoginedMemberId(), id);
-
+		
 		if (reply == null) {
 			return rq.jsHistoryBack(Ut.f("%d번 댓글이 존재하지 않습니다.", id));
 		}
-
+		
 		if (reply.getMemberId() != rq.getLoginedMemberId()) {
 			return rq.jsHistoryBack("본인이 작성 한 댓글만 삭제 가능합니다");
 		}
-
+		
+		if (Ut.empty(replaceUri)) {
+			switch (reply.getRelTypeCode()) {
+			case "article":
+				replaceUri = Ut.f("../article/detail?id=%d", reply.getRelId());
+				break;
+			}
+		} 
 		replyService.deleteReply(id);
-		replaceUri = Ut.f("../article/detail?id=%d", id);
-		return rq.jsReplace(Ut.f("%d번 게시물이 삭제되었습니다.", id), replaceUri);
-
+		return rq.jsReplace(Ut.f("%d번 댓글이 삭제되었습니다.", id), replaceUri);
+		
+	}
+	
+	@RequestMapping("/usr/reply/modify")
+	public String modify(int id, String replaceUri, Model model) {
+		if (Ut.empty(id)) {
+			return rq.jsHistoryBack("id(을)를 입력해주세요.");
+		}
+		Reply reply = replyService.getForPrintReply(rq.getLoginedMemberId(), id);
+		
+		if (reply == null) {
+			return rq.historyBackJsOnView(Ut.f("%d번 댓글은 존재하지 않습니다.", id));
+		}
+		
+		String relDataTitle = null;
+		
+		switch (reply.getRelTypeCode())	 {
+		case "article":
+			Article article = articleService.getArticle(reply.getRelId());
+			relDataTitle = article.getTitle();
+		}
+		model.addAttribute("reply", reply);
+		
+		return "usr/reply/modify";
 	}
 	
 

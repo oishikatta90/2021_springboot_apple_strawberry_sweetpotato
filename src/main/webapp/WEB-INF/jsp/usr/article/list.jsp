@@ -59,15 +59,15 @@
               <td>${article.goodReactionPoint}</td>
               <td>${article.extra__writerName}</td>
               <td><a class="btn-text-link block truncate" href="../article/detail?id=${article.id}">${article.title}</a></td>
-            </tr>
+            </tr>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
           </c:forEach>
-        </tbody>
+        </tbody>  
       </table>
     </div>
     <div class="page-menu mt-3 ">
       <div class="btn-group justify-center">
         <c:set var="pageMenuArmLen" value="5" />
-        <c:set var="startPage" value="${page - pageMenuArmLen >= 1 ? page - pageMenuArmLen : 1}" />
+        <c:set var="startPage" value="${page - pageMenuArmLen >= 1 ? page - pageMenuArmLen : 1}" /> 
         <c:set var="endPage" value="${page + pageMenuArmLen <= pagesCount ? page + pageMenuArmLen : pagesCount }" />
 
         <c:set var="pageBaseUri" value="?boardId=${boardId}" />

@@ -145,4 +145,8 @@ public class ArticleService {
 		return ResultData.from("S-1", "싫어요 수가 증가되었습니다.");
 	}
 
+	public Article getArticle(int id) {
+		return articleRepository.getArticle(id);
+	}
+
 }

@@ -16,6 +16,12 @@
 		#{title},
 		`body`= #{body}
 	</insert>
+	
+	<select id="getArticle" resultType="Article">
+		SELECT * 
+		FROM article
+		WHERE id = #{id}
+	</select>
 
 	<select id="getForPrintArticle" resultType="Article">
 		SELECT A.*,

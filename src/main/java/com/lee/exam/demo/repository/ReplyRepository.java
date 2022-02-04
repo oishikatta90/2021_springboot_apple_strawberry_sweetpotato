@@ -16,8 +16,11 @@ public interface ReplyRepository {
 
 	public List<Reply> getForPrintReplies(Member loginedMember, String relTypeCode, int relId);
 
+	public Reply getReply(int id);
+
 	public Reply getForPrintReply(int memberId, int id);
 
 	public void deleteReply(int id);
+
 
 }
