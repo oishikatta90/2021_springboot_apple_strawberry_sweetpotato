@@ -53,5 +53,10 @@ public class MemberService {
 	}
 
 
+	public void modifyMember(int id, String loginPw, String name, String nickName, String email, String cellphoneNo) {
+		memberRepository.modifyMember(id, loginPw, name, nickName, email, cellphoneNo);
+	}
+
+
 
 }

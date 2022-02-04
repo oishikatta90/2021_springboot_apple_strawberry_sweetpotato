@@ -22,4 +22,7 @@ public interface MemberRepository {
 
 	Member getMemberByNameAndEmail(@Param("name")String name, @Param("email")String email);
 
+
+	void modifyMember(int id, String loginPw, String name, String nickName, String email, String cellphoneNo);
+
 }

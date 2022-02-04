@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lee.exam.demo.service.MemberService;
 import com.lee.exam.demo.util.Ut;
+import com.lee.exam.demo.vo.Article;
 import com.lee.exam.demo.vo.Member;
 import com.lee.exam.demo.vo.ResultData;
 import com.lee.exam.demo.vo.Rq;
@@ -76,11 +77,6 @@ public class UsrMemberController {
 		//로그인을 하면 세션에 loginedMemberId 이름으로
 		//로그인 아이디가 저장된다. if문으로 저장된 값이 있냐
 		//물었을 때 있으면 isLogined를 true로 바꿔줘서 로그인 중으로 표시
-		
-		if (rq.isLogined()) {
-			return rq.jsHistoryBack("이미 로그인 되셨습니다.");
-		}
-		
 		if (Ut.empty(loginId)) {
 			return rq.jsHistoryBack("loginId(을)를 입력해주세요.");
 		}
@@ -126,4 +122,49 @@ public class UsrMemberController {
 	public String showCheckPassword() {
 		return "usr/member/checkPassword";
 	}
+	
+	@RequestMapping("/usr/member/doCheckPassword")
+	@ResponseBody
+	public String doCheckPassword(String loginPw, String replaceUri) {
+		if (Ut.empty(loginPw)) {
+			return rq.jsHistoryBack("loginPw(을)를 입력해주세요.");
+		}
+		
+		if (!rq.getLoginedMember().getLoginPw().equals(loginPw)) {
+			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다.");
+		}
+		
+		return rq.jsReplace("",replaceUri);
+	}
+	
+	@RequestMapping("/usr/member/modify")
+	public String showModify() {
+		return "usr/member/modify";
+	}
+	
+	@RequestMapping("/usr/member/doModify")
+	@ResponseBody
+	public String doModify(int id, String loginPw, String name, String nickName, String email, String cellphoneNo) {
+		if (Ut.empty(loginPw)) {
+			loginPw = null;
+		}
+		if (Ut.empty(name)) {
+			return rq.jsHistoryBack("이름을 입력해주세요.");
+		}
+		if (Ut.empty(nickName)) {
+			return rq.jsHistoryBack("별명을 입력해주세요.");
+		}
+		if (Ut.empty(email)) {
+			return rq.jsHistoryBack("이메일을 입력해주세요.");
+		}
+		if (Ut.empty(cellphoneNo)) {
+			return rq.jsHistoryBack("전화번호를 입력해주세요.");
+		}
+		
+		memberService.modifyMember(rq.getLoginedMemberId(), loginPw, name, nickName, email, cellphoneNo);
+		return rq.jsReplace("회원정보가 수정되었습니다.", "../member/myPage");
+
+	}
+
+	
 }

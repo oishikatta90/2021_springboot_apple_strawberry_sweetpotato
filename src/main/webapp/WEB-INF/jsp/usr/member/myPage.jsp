@@ -37,7 +37,7 @@
             </td>
           </tr>
           <tr>
-            <th>별명</th>
+            <th>전화번호</th>
             <td>
               ${rq.loginedMember.cellphoneNo}
             </td>
