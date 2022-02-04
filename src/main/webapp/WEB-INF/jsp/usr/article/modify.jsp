@@ -27,7 +27,7 @@ function ArticleModify__submit(form) {
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <form class="table-box-type-1" method="post" action="../article/doModify" onsubmit="ArticleModify__submit(this); return false; ">
+    <form class="table-box-type-1" method="post" action="../article/doModify" onsubmit="Modify__submit(this); return false; ">
       <input type="hidden" name="id" value="${article.id }" />
       <table>
         <colgroup>

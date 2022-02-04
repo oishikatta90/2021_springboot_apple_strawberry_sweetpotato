@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.lee.exam.demo.vo.Member;
 import com.lee.exam.demo.vo.Reply;
+import com.lee.exam.demo.vo.ResultData;
 
 @Mapper
 public interface ReplyRepository {
@@ -21,6 +22,8 @@ public interface ReplyRepository {
 	public Reply getForPrintReply(int memberId, int id);
 
 	public void deleteReply(int id);
+
+	public void modifyReplyRd(int id, String body);
 
 
 }

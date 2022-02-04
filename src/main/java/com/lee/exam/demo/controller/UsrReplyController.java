@@ -103,5 +103,28 @@ public class UsrReplyController {
 		return "usr/reply/modify";
 	}
 	
-
+	@RequestMapping("/usr/reply/doModify")
+	@ResponseBody
+	public String doModify(int id, String body, String replaceUri) {
+		Reply reply = replyService.getForPrintReply(rq.getLoginedMemberId(), id);
+		
+		if (reply == null) {
+			return rq.jsHistoryBack(Ut.f("%d번  댓글이 존재하지 않습니다.", id));
+		}
+		
+		if (reply.getMemberId() != rq.getLoginedMemberId()) {
+			return rq.jsHistoryBack("본인이 작성 한 댓글만 수정 가능합니다");
+		}
+		
+		ResultData modifyReplyRd = replyService.modifyReplyRd(id, body);
+		
+		if (Ut.empty(replaceUri)) {
+			switch (reply.getRelTypeCode()) {
+			case "article":
+				replaceUri = Ut.f("../article/detail?id=%d", reply.getRelId());
+				break;
+			}
+		} 
+		return rq.jsReplace(modifyReplyRd.getMsg(), replaceUri);
+	}
 }
