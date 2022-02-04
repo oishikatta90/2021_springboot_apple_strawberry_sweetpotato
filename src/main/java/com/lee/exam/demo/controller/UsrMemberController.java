@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lee.exam.demo.service.MemberService;
@@ -73,7 +74,7 @@ public class UsrMemberController {
 	}
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(String loginId, String loginPw) {
+	public String doLogin(String loginId, String loginPw, @RequestParam(defaultValue = "/") String afterLoginUri) {
 		//로그인을 하면 세션에 loginedMemberId 이름으로
 		//로그인 아이디가 저장된다. if문으로 저장된 값이 있냐
 		//물었을 때 있으면 isLogined를 true로 바꿔줘서 로그인 중으로 표시
@@ -98,7 +99,7 @@ public class UsrMemberController {
 		
 		rq.login(member);
 		
-		return rq.jsReplace(Ut.f("%s님 환영합니다.", member.getNickName()),"/");
+		return rq.jsReplace(Ut.f("%s님 환영합니다.", member.getNickName()),afterLoginUri);
 	}
 	
 	@RequestMapping("/usr/member/doLogout")

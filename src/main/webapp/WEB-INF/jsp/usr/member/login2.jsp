@@ -9,6 +9,7 @@
 </head>
 <body>
 <form class="container mx-auto px-3" method="POST" action="../member/doLogin">
+ <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}" />
   <div class="page-container">
     <div class="login-form-container shadow">
       <div class="login-form-right-side">
