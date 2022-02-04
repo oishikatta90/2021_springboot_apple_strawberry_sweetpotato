@@ -150,6 +150,13 @@ public class Rq {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public String getLoginUri() {
+		return "../member/login?afterLoginUri=" + getAfterLoginUri();
+	}
 
+	public String getAfterLoginUri() {
+		return getEncodedCurrentUri();
+	}
 
 }

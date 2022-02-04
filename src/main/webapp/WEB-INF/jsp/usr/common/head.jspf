@@ -52,14 +52,14 @@
 					<span>작성</span>
 				</a>
 			</li>
-            <c:if test="${!rq.isLogined()}">
+            <c:if test="${!rq.logined}">
 			<li>
-				<a class="h-full hover:underline flex items-center px-3" href="/usr/member/login">
+				<a class="h-full hover:underline flex items-center px-3" href="${rq.loginUri}">
 					<span><i class="fas fa-key"></i> 로그인</span>
 				</a>
 			</li>
             </c:if>
-            <c:if test="${rq.isLogined()}">
+            <c:if test="${rq.logined}">
 			<li>
 				<a class="h-full hover:underline flex items-center px-3" href="/usr/member/myPage">
 					<span> ${rq.loginedMember.nickName}'s Profile</span>
