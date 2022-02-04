@@ -116,4 +116,14 @@ public class UsrMemberController {
 		
 		return rq.jsReplace("로그아웃 되셨습니다.","/");
 	}
+	
+	@RequestMapping("/usr/member/myPage")
+	public String showMyPage() {
+		return "usr/member/myPage";
+	}
+	
+	@RequestMapping("/usr/member/checkPassword")
+	public String showCheckPassword() {
+		return "usr/member/checkPassword";
+	}
 }

@@ -37,6 +37,8 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer{
         		.addPathPatterns("/usr/article/doModify")
         		.addPathPatterns("/usr/reactionPoint/doGoodReaction")
         		.addPathPatterns("/usr/reactionPoint/doBadReaction")
+        		.addPathPatterns("/usr/reactionPoint/doCancleGoodReaction")
+        		.addPathPatterns("/usr/reactionPoint/doCancleBadReaction")
         		.addPathPatterns("/usr/reply/doWrite")
         		.addPathPatterns("/usr/reply/doDelete")
         		.addPathPatterns("/usr/reply/doDeleteAjax")
@@ -45,6 +47,7 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer{
         		.addPathPatterns("/usr/member/modify")
         		.addPathPatterns("/usr/member/doModify")
         		.addPathPatterns("/usr/member/checkPassword")
-        		.addPathPatterns("/usr/member/doCheckPassword");
+        		.addPathPatterns("/usr/member/doCheckPassword")
+        		.addPathPatterns("/usr/member/myPage");
     }
 }
