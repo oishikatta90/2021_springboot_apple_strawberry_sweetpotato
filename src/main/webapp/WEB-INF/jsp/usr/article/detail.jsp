@@ -221,10 +221,10 @@
             <td>${reply.forPrintBody}</td>
             <c:if test="${reply.extra__actorCanDelete}">
               <td><a class="btn-text-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false  ) return false;"
-                href="../reply/doDelete?id=${reply.id }">삭제</a></td>
+                 href="../reply/doDelete?id=${reply.id}&replaceUri=${rq.encodedCurrentUri}">삭제</a></td>
             </c:if>
             <c:if test="${reply.extra__actorCanDelete}">
-              <td><a class="btn-text-link" href="../reply/modify?id=${reply.id }">수정</a></td>
+              <td><a class="btn-text-link"  href="../reply/modify?id=${reply.id}&replaceUri=${rq.encodedCurrentUri}">수정</a></td>
             </c:if>
           </tr>
         </c:forEach>
