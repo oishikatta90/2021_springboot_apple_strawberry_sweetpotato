@@ -158,10 +158,16 @@ public class Rq {
 	public String getLoginUri() {
 		return "../member/login?afterLoginUri=" + getAfterLoginUri();
 	}
+	public String getLogoutUri() {
+		String requestUri = req.getRequestURI();
+		return "../member/doLogout?afterLogoutUri=" + getAfterLogoutUri();
+	}
 
 	public String getAfterLoginUri() {
 		String requestUri = req.getRequestURI();
-
+		
+		
+		//로그인 후 다시 돌아가면 안되는 페이지 URL
 		switch (requestUri) {
 		case "/usr/member/login":
 		case "/usr/member/join":
@@ -173,4 +179,8 @@ public class Rq {
 		return getEncodedCurrentUri();
 	}
 
+	private String getAfterLogoutUri() {
+		
+		return getEncodedCurrentUri();
+	}
 }
