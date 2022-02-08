@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lee.exam.demo.service.MemberService;
 import com.lee.exam.demo.util.Ut;
-import com.lee.exam.demo.vo.Article;
 import com.lee.exam.demo.vo.Member;
 import com.lee.exam.demo.vo.ResultData;
 import com.lee.exam.demo.vo.Rq;
@@ -25,53 +24,28 @@ public class UsrMemberController {
 		this.rq = rq;
 	}
 	
-	@RequestMapping("/usr/member/doJoin")
-	@ResponseBody
-	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickName, String cellphoneNo, String email) {
-		if (Ut.empty(loginId)) {
-			return ResultData.from("F-1", "loginId(을)를 입력해주세요.");
-		}
-		if (Ut.empty(loginPw)) {
-			return ResultData.from("F-2", "loginPw(을)를 입력해주세요.");
-		}
-		if (Ut.empty(name)) {
-			return ResultData.from("F-3", "name(을)를 입력해주세요.");
-		}
-		if (Ut.empty(nickName)) {
-			return ResultData.from("F-4", "nickName(을)를 입력해주세요.");
-		}
-		if (Ut.empty(cellphoneNo)) {
-			return ResultData.from("F-5", "cellphoneNo(을)를 입력해주세요.");
-		}
-		if (Ut.empty(email)) {
-			return ResultData.from("F-6", "email(을)를 입력해주세요.");
-		}
-		
-		//joinRd 안에는
-		//S-1, 회원가입완료메세지, id(ex7(번호))
-		ResultData<Integer> joinRd = memberService.join(loginId,loginPw,name,nickName,cellphoneNo,email);
-		
-		if (joinRd.isFail()) {
-			return (ResultData)joinRd;
-		}
-		
-		Member member = memberService.getMemberById(joinRd.getData1());
-		
-		return ResultData.newData(joinRd,"member", member);
-	}
 	
-	@RequestMapping("/usr/member/signUp")
-	public String showSignUp(HttpSession httpSession) {
-		return "/usr/member/signUp";
-	}
-	@RequestMapping("/usr/member/doSignUp")
-	public String doSignUp(HttpSession httpSession) {
-		return "/usr/member/signUp";
+	@RequestMapping("/usr/member/join")
+	public String showJoin() {
+		return "/usr/member/join";
 	}
 	@RequestMapping("/usr/member/login")
 	public String showLogin(HttpSession httpSession) {
 		return "/usr/member/login2";
 	}
+	
+	@RequestMapping("/usr/member/doJoin")
+	@ResponseBody
+	public String doJoin(String loginId, String loginPw, String name, String nickName, String cellphoneNo, String email, @RequestParam(defaultValue = "/") String afterLoginUri) {
+		//joinRd 안에는
+		//S-1, 회원가입완료메세지, id(ex7(번호))
+		memberService.join(loginId,loginPw,name,nickName,cellphoneNo,email);
+		
+		String afterJoinUri = "../member/login?afterLoginUri=" + Ut.getUriEncoded(afterLoginUri);
+
+		return rq.jsReplace("회원가입이 완료되었습니다. 로그인 후 이용해주세요.", afterJoinUri);
+	}
+	
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
 	public String doLogin(String loginId, String loginPw, @RequestParam(defaultValue = "/") String afterLoginUri) {

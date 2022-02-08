@@ -93,10 +93,15 @@ public class Rq {
 		
 	}
 
-	public String historyBackJsOnView(String msg) {
-		req.setAttribute("msg",msg);
-		req.setAttribute("historyBack",true);
+	public String historyBackJsOnView(String resultCode, String msg) {
+		req.setAttribute("msg", String.format("[%s] %s", resultCode, msg));
+		req.setAttribute("historyBack", true);
 		return "common/js";
+	}
+
+	public String jsHistoryBack(String resultCode, String msg) {
+		msg = String.format("[%s] %s", resultCode, msg);
+		return Ut.jsHistoryBack(msg);
 	}
 
 	public String jsHistoryBack(String msg) {
@@ -153,6 +158,10 @@ public class Rq {
 	public void initOnBeforeActionInterceptor() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public String getJoinUri() {
+		return "../member/join?afterLoginUri=" + getAfterLoginUri();
 	}
 	
 	public String getLoginUri() {

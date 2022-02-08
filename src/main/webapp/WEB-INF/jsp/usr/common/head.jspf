@@ -72,7 +72,7 @@
 			</li>
             </c:if>
             <li>
-              <a class="h-full hover:underline flex items-center px-3" href="/usr/member/signUp">
+              <a class="h-full hover:underline flex items-center px-3" href="${rq.joinUri}">
                 <span><i class="fas fa-user-plus"></i> 회원가입</span>
               </a>
    	        </li>
