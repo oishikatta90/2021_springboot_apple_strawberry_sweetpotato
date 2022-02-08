@@ -58,7 +58,10 @@
               <td>${article.hitCount}</td>
               <td>${article.goodReactionPoint}</td>
               <td>${article.extra__writerName}</td>
-              <td><a class="btn-text-link block truncate" href="../article/detail?id=${article.id}">${article.title}</a></td>
+              <td><a class="btn-text-link block truncate" href="${rq.getArticleDetailUriFromArticleList(article)}">
+                  ${article.title}
+                  </a>
+             </td>
             </tr>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
           </c:forEach>
         </tbody>  
