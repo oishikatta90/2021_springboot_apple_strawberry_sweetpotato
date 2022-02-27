@@ -34,14 +34,51 @@ public class UsrMemberController {
 		return "/usr/member/login2";
 	}
 	
+	@RequestMapping("/usr/member/getLoginIdDup")
+	@ResponseBody
+	public ResultData getLoginIdDup(String loginId) {
+		if (Ut.empty(loginId)) {
+			return ResultData.from("F-A1", "loginId를 입력해주세요.");
+		}
+
+		Member oldMember = memberService.getMemberByLoginId(loginId);
+
+		if (oldMember != null) {
+			return ResultData.from("F-A2", "해당 로그인아이디는 이미 사용중입니다.", "loginId", loginId);
+		}
+
+		return ResultData.from("S-1", "사용가능한 로그인아이디 입니다.", "loginId", loginId);
+	}
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public String doJoin(String loginId, String loginPw, String name, String nickName, String cellphoneNo, String email, @RequestParam(defaultValue = "/") String afterLoginUri) {
-		//joinRd 안에는
-		//S-1, 회원가입완료메세지, id(ex7(번호))
-		memberService.join(loginId,loginPw,name,nickName,cellphoneNo,email);
+	public String doJoin(String loginId, String loginPw, String name, String nickName, String cellphoneNo, String email,
+			@RequestParam(defaultValue = "/") String afterLoginUri) {
+		if (Ut.empty(loginId)) {
+			return rq.jsHistoryBack("F-1", "loginId(을)를 입력해주세요.");
+		}
+		if (Ut.empty(loginPw)) {
+			return rq.jsHistoryBack("F-2", "loginPw(을)를 입력해주세요.");
+		}
+		if (Ut.empty(name)) {
+			return rq.jsHistoryBack("F-3", "name(을)를 입력해주세요.");
+		}
+		if (Ut.empty(nickName)) {
+			return rq.jsHistoryBack("F-4", "nickname(을)를 입력해주세요.");
+		}
+		if (Ut.empty(cellphoneNo)) {
+			return rq.jsHistoryBack("F-5", "cellphoneNo(을)를 입력해주세요.");
+		}
+		if (Ut.empty(email)) {
+			return rq.jsHistoryBack("F-6", "email(을)를 입력해주세요.");
+		}
+		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickName, cellphoneNo, email);
+		if (joinRd.isFail()) {
+			return rq.jsHistoryBack(joinRd.getResultCode(), joinRd.getMsg());
+		}
 		
+
 		String afterJoinUri = "../member/login?afterLoginUri=" + Ut.getUriEncoded(afterLoginUri);
+		
 
 		return rq.jsReplace("회원가입이 완료되었습니다. 로그인 후 이용해주세요.", afterJoinUri);
 	}
@@ -49,7 +86,7 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
 	public String doLogin(String loginId, String loginPw, @RequestParam(defaultValue = "/") String afterLoginUri) {
-		//로그인을 하면 세션에 loginedMemberId 이름으로
+		//로그인을 하면 세션에 loginedMemberId 이름으로 
 		//로그인 아이디가 저장된다. if문으로 저장된 값이 있냐
 		//물었을 때 있으면 isLogined를 true로 바꿔줘서 로그인 중으로 표시
 		if (Ut.empty(loginId)) {
@@ -58,7 +95,6 @@ public class UsrMemberController {
 		if (Ut.empty(loginPw)) {
 			return rq.jsHistoryBack("loginPw(을)를 입력해주세요.");
 		}
-		
 		//joinRd 안에는
 		//S-1, 회원가입완료메세지, id(ex7(번호))
 		Member member = memberService.getMemberByLoginId(loginId);
@@ -69,10 +105,9 @@ public class UsrMemberController {
 		
 		if (!member.getLoginPw().equals(loginPw)) {
 			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다.");
-		}
-		
+		} 
 		rq.login(member);
-		
+		 
 		return rq.jsReplace(Ut.f("%s님 환영합니다.", member.getNickName()),afterLoginUri);
 	}
 	
@@ -84,7 +119,7 @@ public class UsrMemberController {
 		}
 		
 		rq.logout();
-		
+			
 		return rq.jsReplace("로그아웃 되셨습니다.", afterLogoutUri);
 	}
 	
@@ -94,7 +129,7 @@ public class UsrMemberController {
 	}
 	
 	@RequestMapping("/usr/member/checkPassword")
-	public String showCheckPassword() {
+	public String showCheckPassword() { 
 		return "usr/member/checkPassword";
 	}
 	
@@ -131,15 +166,15 @@ public class UsrMemberController {
 			return rq.historyBackJsOnView(checkMemberModifyAuthKeyRd.getMsg());
 		}
 		return "usr/member/modify";
-	}
+	} 
 	
 	@RequestMapping("/usr/member/doModify")
 	@ResponseBody
 	public String doModify(String memberModifyAuthKey, int id, String loginPw, String name, String nickName, String email, String cellphoneNo) {
 		if ( Ut.empty(memberModifyAuthKey) ) {
-			return rq.jsHistoryBack("memberModifyAuthKey(이)가 필요합니다.");
+			return rq.jsHistoryBack("memberModifyAuthKey(이)가 필요합니다."); 
 		}
-
+	
 		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(), memberModifyAuthKey);
 
 		if ( checkMemberModifyAuthKeyRd.isFail() ) {
@@ -159,7 +194,7 @@ public class UsrMemberController {
 		}
 		if (Ut.empty(cellphoneNo)) {
 			return rq.jsHistoryBack("전화번호를 입력해주세요.");
-		}
+		} 
 		
 		memberService.modifyMember(rq.getLoginedMemberId(), loginPw, name, nickName, email, cellphoneNo);
 		return rq.jsReplace("회원정보가 수정되었습니다.", "../member/myPage");

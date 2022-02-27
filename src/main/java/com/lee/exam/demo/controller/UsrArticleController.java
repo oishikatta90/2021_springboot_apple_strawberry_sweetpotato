@@ -62,6 +62,16 @@ public class UsrArticleController {
 		model.addAttribute("articles", articles);
 		return "usr/article/list";
 	}
+	
+	@RequestMapping("/usr/article/strawberry")
+	public String strawberry() {
+		return "usr/article/strawberry";	
+	}
+	
+	@RequestMapping("/usr/article/sweetPotato")
+	public String sweetPotato() {
+		return "usr/article/sweetPotato";
+	}
 
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(Model model, int id) {
@@ -192,7 +202,7 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
 	public String doWrite(String title, String body, int boardId, String replaceUri) {
-
+		
 		if (Ut.empty(title)) {
 			return rq.jsHistoryBack("제목을 입력해주세요");
 		}

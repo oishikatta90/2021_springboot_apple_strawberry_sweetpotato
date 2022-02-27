@@ -1,0 +1,145 @@
+/*
+* {
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+}
+
+
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  background: #ecf0f3;
+}
+*/
+hr {
+  color: #d00920;
+}
+.card {
+  width: 700px;
+  height:400px;
+   /*
+  display: flex;
+  justify-content: space-around;
+  grid-template-columns: 300px;
+  grid-template-rows: 210px 210px 80px;
+  grid-template-areas: "image" "text" "stats";
+  */
+  border-radius: 18px;
+  background: #ffebea;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
+  text-align: center;
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.2);
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+}
+
+.card-image1 {
+  background: url("apple/mikilife.png");
+  width: 299px;
+  height: 221px;
+  margin-left: 200px;
+  margin-top: 35px;
+}
+.card-image2 {
+  background: url("apple/tsugaru.png");
+  width: 299px;
+  height: 221px;
+  margin-left: 200px;
+  margin-top: 35px;
+}
+.card-image3 {
+  background: url("apple/wasefuji_2-300x247.png");
+  width: 299px;
+  height: 221px;
+  margin-left: 200px;
+  margin-top: 35px;
+}
+.card-image4 {
+  background: url("apple/shinano_s_2-300x247.png");
+  width: 299px;
+  height: 221px;
+  margin-left: 200px;
+  margin-top: 25px;
+}
+.card-image5 {
+  background: url("apple/kogyoku_2-300x247.png");
+  width: 299px;
+  height: 221px;
+  margin-left: 200px;
+  margin-top: 35px;
+}
+.card-image6 {
+  background: url("apple/sekaiichi_2-300x247.png");
+  width: 299px;
+  height: 221px;
+  margin-left: 200px;
+  margin-top: 35px;
+}
+.card-image7 {
+  background: url("apple/jona_2-300x247.png");
+  width: 299px;
+  height: 221px;
+  margin-left: 200px;
+  margin-top: 25px;
+}
+.card-image8 {
+  background: url("apple/mutsu_2-300x247.png");
+  width: 299px;
+  height: 221px;
+  margin-left: 200px;
+  margin-top: 3px;
+}
+.card-image9 {
+  background: url("apple/hokuto_2-300x247.png");
+  width: 299px;
+  height: 221px;
+  margin-left: 200px;
+  margin-top: 25px;
+}
+.card-image10 {
+  background: url("apple/fuji_2-300x247.png");
+  width: 299px;
+  height: 221px;
+  margin-left: 200px;
+  margin-top: 20px;
+}
+.card-image11 {
+  background: url("apple/sanfuji_2-300x247.png");
+  width: 299px;
+  height: 221px;
+  margin-left: 200px;
+  margin-top: 20px;
+}
+.card-image12 {
+  background: url("apple/shinano_2-300x247.png");
+  width: 299px;
+  height: 221px;
+  margin-left: 200px;
+  margin-top: 20px;
+}
+.card-image13 {
+  background: url("apple/orin_2-300x247.png");
+  width: 299px;
+  height: 221px;
+  margin-left: 200px;
+  margin-top: 7px;
+}
+.card-image14 {
+  background: url("apple/kinsei_2-300x247 (1).png");
+  width: 299px;
+  height: 221px;
+  margin-left: 200px;
+  margin-top: 5px;
+}
+

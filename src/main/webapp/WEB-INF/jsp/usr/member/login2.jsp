@@ -5,37 +5,34 @@
 <meta charset="UTF-8">
 <title>####-로그인</title>
 <link rel="stylesheet" href="/resource/common.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css" />
+<link href="https://cdn.jsdelivr.net/npm/daisyui@1.11.1/dist/full.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
-<form class="container mx-auto px-3" method="POST" action="../member/doLogin">
- <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}" />
-  <div class="page-container">
-    <div class="login-form-container shadow">
-      <div class="login-form-right-side">
-        <div class="top-logo-wrap"></div>
-        <h1>로그인창</h1>
-        <p>로그인 해보고 싶다</p>
-      </div>
-      <div class="login-form-left-side">
-        <div class="login-top-wrap">
-          <span>잊진 않았겠지?</span>
+  <form class="mx-auto px-3" method="POST" action="../member/doLogin">
+    <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}" />
+    <div class="page-container">
+      <div class="rounded login-form-container shadow-2xl pt-20 pl-20 pr-20">
+        <div class="login-form-right-side">
+          <div class="top-logo-wrap"></div>
+          <h1 class="text-center">로그인</h1>
         </div>
-        <div class="login-input-container">
-          <div class="login-input-wrap input-id">
-            <i class="far fa-envelope"></i> <input type="text" name="loginId">
-          </div>
-          <div class="login-input-wrap input-password">
-            <i class="fas fa-key"></i> <input type="password" name="loginPw">
-          </div>
+        <div class="form-control">
+          <label class="label"> <span class="label-text">아이디</span>
+          </label> <input type="text" placeholder="아이디" class="input input-bordered" name="loginId"
+            onkeyup="checkLoginIdDup(this);" autocomplete="off" />
         </div>
-        <div class="btns">
-          <button type="submit">로그인</button>
-          <button class="btn-text-link " type="button" onclick="history.back()">뒤로가기</button>
+        <div class="form-control"> 
+          <label class="label"> <span class="label-text">비밀번호</span>
+          </label> <input type="password" placeholder="비밀번호" class="input input-bordered" name="loginPw">
+        </div>
+        <div class="btns mb-5">
+          <button class="btn btn-warning mt-5" type="submit">로그인</button> 
+            <button class="btn btn-warning mt-5" type="button" onclick="history.back()">뒤로가기</button>
         </div>
       </div>
     </div>
-  </div>
   </form>
 </body>
 </html>

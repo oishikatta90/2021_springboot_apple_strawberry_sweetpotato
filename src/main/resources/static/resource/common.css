@@ -61,11 +61,16 @@ html>body .toastui-editor-md-code-block
 
 /* 커스텀 */
 html, body {
+  
 }
 
 body{
-  background: #F2F4F8;
+  /*background: #F2F4F8;*/
   min-height: 100vh;
+}
+
+header {
+  background: #d00920;
 }
 
 section {
@@ -78,14 +83,12 @@ footer {
 }
 
 .footer {
-  padding-top: 3.4rem;
-  padding-bottom: 5.6rem;
-  background-color: #333;
-  color: #a0a0a0;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  background-color: #d00920;
+  color: white;
 }
 
-.footer-grid {
-}
 
 .footer-h3 {
   font-weight:700px;
@@ -93,7 +96,7 @@ footer {
 }
 
 .fas{
-  color:#6667AB;
+  color: yellow;
 }
 
 button {
@@ -109,8 +112,12 @@ button {
 .page-container{
     width: 100vw;
     height: 100vh;
-    background: #eff0f2;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.hidden {
+  margin-bottom : 30px;
+  margin-top: 30px;
 }

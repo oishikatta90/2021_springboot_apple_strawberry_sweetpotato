@@ -93,6 +93,12 @@ public class Rq {
 		
 	}
 
+	public String historyBackJsOnView(String msg) {
+		req.setAttribute("msg",msg);
+		req.setAttribute("historyBack",true);
+		return "common/js";
+	}
+	
 	public String historyBackJsOnView(String resultCode, String msg) {
 		req.setAttribute("msg", String.format("[%s] %s", resultCode, msg));
 		req.setAttribute("historyBack", true);
@@ -103,6 +109,8 @@ public class Rq {
 		msg = String.format("[%s] %s", resultCode, msg);
 		return Ut.jsHistoryBack(msg);
 	}
+	
+	
 
 	public String jsHistoryBack(String msg) {
 		if (msg == null) {

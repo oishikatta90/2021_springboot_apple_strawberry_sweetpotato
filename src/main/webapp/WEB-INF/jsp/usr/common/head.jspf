@@ -27,53 +27,63 @@
 	<header>
 	  <div class="flex h-24 container mx-auto">
 		<a href="/" class="flex items-center px-3">
-			<span>로고</span>
+			<span style="color:white; font-size: 43px;">사딸고</span>
 		</a>
 		<div class="flex-grow"></div>
 		
 		<ul class="flex">
 			<li class="h-full hover:underline flex items-center px-3">
 				<a href="/">
-					<span>홈</span>
+					<span style="color: white;">사과</span>
+				</a>
+			</li>
+			<li class="h-full hover:underline flex items-center px-3">
+				<a href="/usr/article/strawberry">
+					<span style="color: white;">딸기</span>
+				</a>
+			</li>
+			<li class="h-full hover:underline flex items-center px-3">
+				<a href="/usr/article/sweetPotato">
+					<span style="color: white;">고구마</span>
 				</a>
 			</li>
 			<li class="h-full hover:underline flex items-center px-3">
 				<a href="/usr/article/list?boardId=1">
-					<span>공지사항</span>
+					<span style="color: white;">공지사항</span>
 				</a>
 			</li>
 			<li class="h-full hover:underline flex items-center px-3">
 				<a href="/usr/article/list?boardId=2">
-					<span>자유게시판</span>
+					<span style="color: white;">자유게시판</span>
 				</a>
 			</li>
 			<li class="h-full hover:underline flex items-center px-3">
 				<a href="/usr/article/write">
-					<span>작성</span>
+					<span style="color: white;">작성</span>
 				</a>
 			</li>
             <c:if test="${!rq.logined}">
 			<li>
 				<a class="h-full hover:underline flex items-center px-3" href="${rq.loginUri}">
-					<span><i class="fas fa-key"></i> 로그인</span>
+					<span style="color: white;"><i class="fas fa-key"></i> 로그인</span>
 				</a>
 			</li>
             </c:if>
             <c:if test="${rq.logined}">
 			<li>
 				<a class="h-full hover:underline flex items-center px-3" href="/usr/member/myPage">
-					<span> ${rq.loginedMember.nickName}'s Profile</span>
+					<span style="color: white;"> ${rq.loginedMember.nickName}'s Profile</span>
 				</a>
 			</li>
 			<li>
 				<a class="h-full hover:underline flex items-center px-3" href="${rq.logoutUri}">
-					<span><i class="fas fa-sign-out-alt"></i>  로그아웃</span>
+					<span style="color: white;"><i class="fas fa-sign-out-alt"></i>  로그아웃</span>
 				</a>
 			</li>
             </c:if>
             <li>
               <a class="h-full hover:underline flex items-center px-3" href="${rq.joinUri}">
-                <span><i class="fas fa-user-plus"></i> 회원가입</span>
+                <span style="color: white;"><i class="fas fa-user-plus"></i> 회원가입</span>
               </a>
    	        </li>
 		</ul>
