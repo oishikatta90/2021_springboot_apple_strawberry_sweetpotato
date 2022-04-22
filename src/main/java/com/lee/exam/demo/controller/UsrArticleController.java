@@ -108,6 +108,7 @@ public class UsrArticleController {
 	public ResultData<Integer> doIncreaseHitCountRd(int id) {
 		ResultData<Integer> increaseHitCountRd =  articleService.increaseHitCount(id);
 		
+		
 		if (increaseHitCountRd.isFail()) {
 			return increaseHitCountRd;
 		}

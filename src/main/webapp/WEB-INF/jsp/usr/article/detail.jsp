@@ -75,11 +75,13 @@
                       href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
                       class="btn btn-xs btn-primary btn-outline">좋아요 👍</a>
                   </div>
+                  <!-- 
                   <div class="tooltip" data-tip="이 제품을 싫어합니다.">
                     <a
                       href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
                       class="btn btn-xs btn-secondary btn-outline">싫어요 👎</a>
                   </div>
+                 -->
                 </c:if>
 
                 <c:if test="${actorCanMakeCancleGoodReactionPoint }">
@@ -88,11 +90,13 @@
                       href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
                       class="btn btn-xs btn-primary">좋아요 👍</a>
                   </div>
+                  <!--  
                   <div class="tooltip" data-tip="이 제품을 싫어합니다.">
                     <a
                       href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
                       class="btn btn-xs btn-secondary btn-outline btn-disabled>">싫어요 👎</a>
                   </div>
+                  -->
                 </c:if>
 
               </div>

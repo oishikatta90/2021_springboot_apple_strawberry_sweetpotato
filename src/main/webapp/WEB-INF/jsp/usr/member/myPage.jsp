@@ -9,7 +9,7 @@
     <div class="table-box-type-1">
       <table>
         <colgroup>
-          <col width="200" />
+          <col width="150" />
         </colgroup>
         <tbody>
           <tr>
@@ -42,15 +42,10 @@
               ${rq.loginedMember.cellphoneNo}
             </td>
           </tr>
-          <tr>
-            <th>비고</th>
-            <td>
-              <a href="../member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify')}" class="btn btn-primary">회원정보수정</a>
-              <button type="button" class="btn btn-outline btn-secondary" onclick="history.back();">뒤로가기</button>
-            </td>
-          </tr>
         </tbody>
       </table>
+              <a href="../member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify')}" class="btn btn-primary">회원정보수정</a>
+              <button type="button" class="btn btn-outline " onclick="history.back();">뒤로가기</button>
     </div>
   </div>
 </section>

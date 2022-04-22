@@ -142,7 +142,7 @@
         </div>
         <div class="card-stats mt-2">후지와 같은 품종 비닐을 씌우고 않고 재배를 하기 때문에 <br>햇빛을 많이 받아 당도가 높다</div>
       </div>
-      <div class="card mt-20">
+      <div class="cardYellow mt-20">
         <div class="card-image12"></div>
         <div class="half">
           <h5>
@@ -154,7 +154,7 @@
         </div>
         <div class="card-stats mt-2">헤이세이11년 품종등록, 360g 정도에 껍질이 노랑색이다 <br>향이 있고 과즙이 풍부하고 높은 당도와 충분한 산미</div>
       </div>
-      <div class="card mt-20">
+      <div class="cardYellow mt-20">
         <div class="card-image13"></div>
         <div class="half">
           <h5>
@@ -166,7 +166,7 @@
         </div>
         <div class="card-stats mt-2">쇼와27년 품종등록, 300g 정도에 껍질이 노란색이다 <br>과육이 살짝 단단하며 과즙이 풍부하고 산미는 거의 없으며 <br>단맛과 독특한 향이 특징이다</div>
       </div>
-      <div class="card mt-20">
+      <div class="cardYellow mt-20">
         <div class="card-image14"></div>
         <div class="half">
           <h5>

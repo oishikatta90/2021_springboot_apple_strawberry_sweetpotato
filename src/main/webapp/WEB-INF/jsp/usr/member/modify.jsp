@@ -124,18 +124,15 @@
               <input class="input input-bordered" name="cellphoneNo" placeholder="전화번호를 입력해주세요." type="tel" value=" ${rq.loginedMember.cellphoneNo}" />
             </td>
           </tr>
-            <th>회원정보수정</th>
-            <td>
-              <button type="submit" class="btn btn-accent">수정</button>
-              <button type="button" class="btn btn-outline btn-primary" onclick="history.back();">뒤로가기</button>
-            </td>
-          </tr>
         </tbody>
       </table>
+              <button type="submit" class="btn btn-primary">수정</button>
+              <button type="button" class="btn btn-outline\" onclick="history.back();">뒤로가기</button>
     </div>
-
+    <!--  
     <div class="btns">
       <button class="btn-text-link " type="button" onclick="history.back()">뒤로가기</button>
     </div>
+    -->
   </form>
 </section>

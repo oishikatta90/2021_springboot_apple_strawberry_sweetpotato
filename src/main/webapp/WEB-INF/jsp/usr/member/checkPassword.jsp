@@ -20,19 +20,15 @@
             <th>비밀번호</th>
             <td><input name="loginPw" class="w-96" type="password" placeholder="비밀번호" required="required"></td>
           </tr>
-          <tr>
-            <th>비밀번호 확인</th>
-            <td>
-              <button type="submit" class="btn btn-accent">비밀번호 확인</button>
-              <button type="button" class="btn btn-outline btn-primary" onclick="history.back();">뒤로가기</button>
-            </td>
-          </tr>
         </tbody>
       </table>
+              <button type="submit" class="btn btn-primary">비밀번호 확인</button>
+              <button type="button" class="btn btn-outline" onclick="history.back();">뒤로가기</button>
     </div>
-
+    <!-- 
     <div class="btns">
       <button class="btn-text-link " type="button" onclick="history.back()">뒤로가기</button>
     </div>
+     -->
   </form>
 </section>
